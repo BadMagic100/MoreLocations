@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace MoreLocationsICTesting
 {
-    public class MoreLocationsICTestingMod : Mod
+    public class MoreLocationsICTests : Mod
     {
         public override string GetVersion() => GetType().Assembly.GetName().Version.ToString();
 
