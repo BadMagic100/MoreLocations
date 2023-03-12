@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoreLocationsICTesting", "MoreLocationsICTesting\MoreLocationsICTesting.csproj", "{423D995B-1C92-4D81-AA5E-904A0A565946}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +24,10 @@ Global
 		{5E0E77DF-F676-4731-9A43-CB884BC68192}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E0E77DF-F676-4731-9A43-CB884BC68192}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E0E77DF-F676-4731-9A43-CB884BC68192}.Release|Any CPU.Build.0 = Release|Any CPU
+		{423D995B-1C92-4D81-AA5E-904A0A565946}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{423D995B-1C92-4D81-AA5E-904A0A565946}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{423D995B-1C92-4D81-AA5E-904A0A565946}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{423D995B-1C92-4D81-AA5E-904A0A565946}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
