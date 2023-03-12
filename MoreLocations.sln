@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33403.182
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoreLocations", "MoreLocations\MoreLocations.csproj", "{5E0E77DF-F676-4731-9A43-CB884BC68192}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution Files", "{183EDB6C-3BFA-4791-BE7A-E8804DE0C627}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+		.github\dependabot.yml = .github\dependabot.yml
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E0E77DF-F676-4731-9A43-CB884BC68192}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E0E77DF-F676-4731-9A43-CB884BC68192}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E0E77DF-F676-4731-9A43-CB884BC68192}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E0E77DF-F676-4731-9A43-CB884BC68192}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {79CD362F-52BD-4319-89F2-E7AA25AD0E63}
+	EndGlobalSection
+EndGlobal
