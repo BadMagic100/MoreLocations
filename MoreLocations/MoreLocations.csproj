@@ -50,6 +50,7 @@
         <None Remove="build.yml" />
         <None Remove="dependabot.yml" />
         <None Remove="README.md" />
+        <None Remove="Resources\Logic\locations.json" />
     </ItemGroup>
     <ItemGroup>
         <Reference Include="Assembly-CSharp">
@@ -342,8 +343,5 @@
     <ItemGroup>
         <None Include=".gitignore" />
         <None Include="LocalOverrides.targets" />
-    </ItemGroup>
-    <ItemGroup>
-        <Folder Include="Resources\" />
     </ItemGroup>
 </Project>

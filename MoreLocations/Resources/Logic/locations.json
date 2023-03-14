@@ -1,0 +1,14 @@
+﻿[
+  {
+    "name": "Swim",
+    "logic": "Crossroads_50[right1] + Monomon + (LISTEN ? ANY)"
+  },
+  {
+    "name": "Stag_Nest_Egg",
+    "logic": "Cliffs_03[right1] + (WINGS | LEFTSUPERDASH | FULLCLAW | LEFTDASH) | $StartLocation[Stag Nest]"
+  },
+  {
+    "name": "Geo_Chest-Above_Baldur_Shell",
+    "logic": "Fungus1_28[left1] | Fungus1_28[left2] + (FULLCLAW | WINGS | RIGHTDASH | RIGHTSUPERDASH | $SHADESKIP)"
+  }
+]

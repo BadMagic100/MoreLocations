@@ -1,6 +1,5 @@
 using ItemChangerTesting;
 using Modding;
-using MoreLocations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +23,7 @@ namespace MoreLocationsICTesting
 
         private IEnumerable<Test> InjectTests()
         {
-            IEnumerable<Type> types = typeof(MoreLocationsMod).Assembly.GetTypes().Where(t => t.IsClass && !t.IsAbstract && t.IsSubclassOf(typeof(Test)));
+            IEnumerable<Type> types = typeof(MoreLocationsICTests).Assembly.GetTypes().Where(t => t.IsClass && !t.IsAbstract && typeof(Test).IsAssignableFrom(t));
             foreach (Type t in types)
             {
                 if (t.GetConstructor(Array.Empty<Type>())?.Invoke(Array.Empty<object>()) is Test test)

@@ -1,4 +1,5 @@
 using Modding;
+using MoreLocations.ItemChanger;
 using System;
 
 namespace MoreLocations
@@ -31,6 +32,7 @@ namespace MoreLocations
             Log("Initializing");
 
             // put additional initialization logic here
+            ItemChangerManager.Hook();
 
             Log("Initialized");
         }
