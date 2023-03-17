@@ -32,6 +32,6 @@ namespace MoreLocations.Rando.Costs
             return new LogicGeoCost(lm, amount);
         }
 
-        public void FinishConstruction() { }
+        public void FinishConstruction(Random rng) { }
     }
 }
