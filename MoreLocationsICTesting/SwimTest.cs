@@ -2,7 +2,7 @@
 using ItemChanger;
 using ItemChanger.StartDefs;
 using ItemChangerTesting;
-using MoreLocations.Rando;
+using MoreLocations;
 using System.Collections.Generic;
 
 namespace MoreLocationsICTesting

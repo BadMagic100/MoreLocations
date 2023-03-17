@@ -1,5 +1,5 @@
 ﻿using ItemChangerTesting;
-using MoreLocations.Rando;
+using MoreLocations;
 
 namespace MoreLocationsICTesting
 {

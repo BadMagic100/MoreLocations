@@ -1,6 +1,5 @@
 ﻿using ItemChanger;
 using ItemChanger.Locations;
-using MoreLocations.Rando;
 
 namespace MoreLocations.ItemChanger
 {
@@ -28,7 +27,7 @@ namespace MoreLocations.ItemChanger
                 name = MoreLocationNames.Swim,
                 sceneName = SceneNames.Crossroads_50,
                 trueLocation = quirrelDrownedLocation,
-                falseLocation = new NullLocation() { sceneName = SceneNames.Crossroads_50 },
+                falseLocation = new EmptyLocation(),
                 Test = new PDBool(nameof(PlayerData.quirrelEpilogueCompleted))
             });
         }

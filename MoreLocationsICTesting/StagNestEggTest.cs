@@ -1,7 +1,7 @@
 ﻿using GlobalEnums;
 using ItemChanger;
 using ItemChangerTesting;
-using MoreLocations.Rando;
+using MoreLocations;
 using System.Collections.Generic;
 
 namespace MoreLocationsICTesting

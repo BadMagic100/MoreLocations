@@ -1,6 +1,6 @@
 ﻿using RandoConstantGenerators;
 
-namespace MoreLocations.Rando
+namespace MoreLocations
 {
     [GenerateLogicDefNames("Logic/locations.json")]
     public static partial class MoreLocationNames { }
