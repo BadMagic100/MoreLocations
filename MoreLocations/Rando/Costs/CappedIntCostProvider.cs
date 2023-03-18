@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace MoreLocations.Rando.Costs
 {
-    public class CappedIntCostProvider : ICostProvider
+    public class CappedIntCostProvider : ICostProvider, IWeighted
     {
         private Func<int, Cost> converter;
 
@@ -16,6 +16,12 @@ namespace MoreLocations.Rando.Costs
         private int capacity;
 
         private List<CappedIntCost> createdCosts = new();
+
+        double IWeighted.GetWeight()
+        {
+            // uniformly weight when empty, otherwise weight according to how many costs of the preferred size are available
+            return Math.Max(1.0, (double)capacity / preferredMinCost);
+        }
 
         public CappedIntCostProvider(string term, int preferredMinCost, int initialCapacity, Func<int, Cost> converter)
         {

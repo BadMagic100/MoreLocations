@@ -29,13 +29,13 @@ namespace MoreLocations.Rando
             using Stream t = typeof(LogicPatcher).Assembly.GetManifestResourceStream("MoreLocations.Resources.Logic.terms.json");
             lmb.DeserializeJson(LogicManagerBuilder.JsonType.Terms, t);
 
-            using Stream i = typeof(LogicPatcher).Assembly.GetManifestResourceStream("MoreLocations.Resources.Logic.item.json");
+            using Stream i = typeof(LogicPatcher).Assembly.GetManifestResourceStream("MoreLocations.Resources.Logic.items.json");
             lmb.DeserializeJson(LogicManagerBuilder.JsonType.Items, i);
         }
 
         private static void AddLocationLogic(LogicManagerBuilder lmb)
         {
-            using Stream l = typeof(LogicPatcher).Assembly.GetManifestResourceStream("MoreLocations.Resource.Logic.locations.json");
+            using Stream l = typeof(LogicPatcher).Assembly.GetManifestResourceStream("MoreLocations.Resources.Logic.locations.json");
             lmb.DeserializeJson(LogicManagerBuilder.JsonType.Locations, l);
         }
 
