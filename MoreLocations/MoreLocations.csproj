@@ -50,7 +50,9 @@
         <None Remove="build.yml" />
         <None Remove="dependabot.yml" />
         <None Remove="README.md" />
+        <None Remove="Resources\Logic\items.json" />
         <None Remove="Resources\Logic\locations.json" />
+        <None Remove="Resources\Logic\terms.json" />
     </ItemGroup>
     <ItemGroup>
         <Reference Include="Assembly-CSharp">

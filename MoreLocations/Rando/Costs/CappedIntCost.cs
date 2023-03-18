@@ -53,5 +53,14 @@ namespace MoreLocations.Rando.Costs
         {
             return converter?.Invoke(realCost) ?? throw new InvalidOperationException("Cost converter is undefined");
         }
+
+        public override string ToString()
+        {
+            if (realCost == logicCost)
+            {
+                return $"{{{term?.Name} >= {logicCost}}}";
+            }
+            return $"{{Actual: {term?.Name} >= {realCost}, Worst-case: {term?.Name} >= {logicCost}}}";
+        }
     }
 }

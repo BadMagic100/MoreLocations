@@ -1,0 +1,26 @@
+﻿[
+  {
+    "$type": "RandomizerCore.LogicItems.EmptyItem, RandomizerCore",
+    "Name": "Wanderer's_Journal_Sale"
+  },
+  {
+    "$type": "RandomizerCore.LogicItems.EmptyItem, RandomizerCore",
+    "Name": "Hallownest_Seal_Sale"
+  },
+  {
+    "$type": "RandomizerCore.LogicItems.SingleItem, RandomizerCore",
+    "Name": "King's_Idol_Sale",
+    "Effect": {
+      "Term": "LARGEGEODEPOSIT",
+      "Value": 1
+    }
+  },
+  {
+    "$type": "RandomizerCore.LogicItems.SingleItem, RandomizerCore",
+    "Name": "Arcane_Egg_Sale",
+    "Effect": {
+      "Term": "LARGEGEODEPOSIT",
+      "Value": 1
+    }
+  }
+]

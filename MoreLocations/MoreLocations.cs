@@ -1,10 +1,11 @@
 using Modding;
 using MoreLocations.ItemChanger;
+using MoreLocations.Rando;
 using System;
 
 namespace MoreLocations
 {
-    public class MoreLocationsMod : Mod
+    public class MoreLocationsMod : Mod, IGlobalSettings<GlobalSettings>
     {
         private static MoreLocationsMod? _instance;
 
@@ -20,6 +21,8 @@ namespace MoreLocations
             }
         }
 
+        internal GlobalSettings GS { get; set; } = new();
+
         public override string GetVersion() => GetType().Assembly.GetName().Version.ToString();
 
         public MoreLocationsMod() : base("MoreLocations")
@@ -31,10 +34,18 @@ namespace MoreLocations
         {
             Log("Initializing");
 
-            // put additional initialization logic here
             ItemChangerManager.Hook();
+
+            if (ModHooks.GetMod("Randomizer 4") is Mod)
+            {
+                RandoInterop.Hook();
+            }
 
             Log("Initialized");
         }
+
+        public void OnLoadGlobal(GlobalSettings s) => GS = s;
+
+        public GlobalSettings OnSaveGlobal() => GS;
     }
 }
