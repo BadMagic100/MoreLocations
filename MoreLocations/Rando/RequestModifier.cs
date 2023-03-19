@@ -1,8 +1,10 @@
 ﻿using ItemChanger;
 using MoreLocations.Rando.Costs;
 using RandomizerCore.Logic;
+using RandomizerMod.RandomizerData;
 using RandomizerMod.RC;
 using RandomizerMod.Settings;
+using System;
 
 namespace MoreLocations.Rando
 {
@@ -17,7 +19,6 @@ namespace MoreLocations.Rando
             ProgressionInitializer.OnCreateProgressionInitializer += AddRelicCostTolerances;
 
             RequestBuilder.OnUpdate.Subscribe(float.NegativeInfinity, SetupCostManagement);
-            RequestBuilder.OnUpdate.Subscribe(float.PositiveInfinity, TearDownCostManagement);
 
             RequestBuilder.OnUpdate.Subscribe(-1000f, CapRelicGeoCosts);
 
@@ -29,7 +30,6 @@ namespace MoreLocations.Rando
             RequestBuilder.OnUpdate.Subscribe(0f, ApplyJunkShopSettings);
 
             RequestBuilder.OnUpdate.Subscribe(100f, DerangeLemmShop);
-            RequestBuilder.OnUpdate.Subscribe(100f, ApplyDuplicateShopConstraint);
         }
 
         private static void SetupCostManagement(RequestBuilder rb)
@@ -80,21 +80,142 @@ namespace MoreLocations.Rando
         private static void TearDownCostManagement(RequestBuilder rb)
         {
             relicCostProvider?.FinishConstruction(rb.rng);
+            anyCostProvider?.FinishConstruction(rb.rng);
+
+            relicCostProvider = null;
+            anyCostProvider = null;
         }
 
         private static void SetupRefs(RequestBuilder rb)
         {
+            if (!RandoInterop.Enabled)
+            {
+                return;
+            }
 
+            rb.EditLocationRequest(LocationNames.Lemm, info =>
+            {
+                info.getLocationDef = () => new LocationDef()
+                {
+                    Name = LocationNames.Lemm,
+                    SceneName = SceneNames.Ruins1_05,
+                    FlexibleCount = true,
+                    AdditionalProgressionPenalty = true,
+                };
+            });
         }
 
         private static void CapRelicGeoCosts(RequestBuilder rb)
         {
+            if (!RandoInterop.Enabled)
+            {
+                return;
+            }
 
+            rb.EditItemRequest(MoreItemNames.Wanderers_Journal_Sale, info =>
+            {
+                info.getItemDef = () => new()
+                {
+                    Name = MoreItemNames.Wanderers_Journal_Sale,
+                    Pool = "Geo",
+                    PriceCap = 1,
+                    MajorItem = false,
+                };
+            });
+            rb.EditItemRequest(MoreItemNames.Hallownest_Seal_Sale, info =>
+            {
+                info.getItemDef = () => new()
+                {
+                    Name = MoreItemNames.Hallownest_Seal_Sale,
+                    Pool = "Geo",
+                    PriceCap = 1,
+                    MajorItem = false,
+                };
+            });
+            rb.EditItemRequest(MoreItemNames.Kings_Idol_Sale, info =>
+            {
+                info.getItemDef = () => new()
+                {
+                    Name = MoreItemNames.Kings_Idol_Sale,
+                    Pool = "Geo",
+                    PriceCap = 1,
+                    MajorItem = false,
+                };
+            });
+            rb.EditItemRequest(MoreItemNames.Arcane_Egg_Sale, info =>
+            {
+                info.getItemDef = () => new()
+                {
+                    Name = MoreItemNames.Arcane_Egg_Sale,
+                    Pool = "Geo",
+                    PriceCap = 1,
+                    MajorItem = false,
+                };
+            });
+
+            if (!rb.TryGetItemDef(ItemNames.Wanderers_Journal, out ItemDef wjDef)
+                || !rb.TryGetItemDef(ItemNames.Hallownest_Seal, out ItemDef hsDef)
+                || !rb.TryGetItemDef(ItemNames.Kings_Idol, out ItemDef kiDef)
+                || !rb.TryGetItemDef(ItemNames.Arcane_Egg, out ItemDef aeDef))
+            {
+                throw new ArgumentException("Could not find existing item defs for all relics");
+            }
+            rb.EditItemRequest(ItemNames.Wanderers_Journal, info =>
+            {
+                info.getItemDef = () => wjDef with { PriceCap = 500 };
+            });
+            rb.EditItemRequest(ItemNames.Hallownest_Seal, info =>
+            {
+                info.getItemDef = () => hsDef with { PriceCap = 500 };
+            });
+            rb.EditItemRequest(ItemNames.Kings_Idol, info =>
+            {
+                info.getItemDef = () => kiDef with { PriceCap = 500 };
+            });
+            rb.EditItemRequest(ItemNames.Arcane_Egg, info =>
+            {
+                info.getItemDef = () => aeDef with { PriceCap = 500 };
+            });
         }
 
         private static void ApplyShopCostRandomization(RequestBuilder rb)
         {
+            rb.CostConverters.Subscribe(0f, ConvertDeferredCosts!);
+            rb.rm.OnSendEvent += (eventType, _) =>
+            {
+                if (eventType == RandomizerCore.RandoEventType.Initializing)
+                {
+                    TearDownCostManagement(rb);
+                }
+            };
 
+            if (!RandoInterop.Enabled)
+            {
+                return;
+            }
+
+            rb.EditLocationRequest(LocationNames.Lemm, info =>
+            {
+                info.onRandoLocationCreation += (factory, rl) =>
+                {
+                    if (relicCostProvider == null)
+                    {
+                        return;
+                    }
+                    rl.AddCost(relicCostProvider.Next(factory.lm, factory.rng, null!));
+                };
+            });
+        }
+
+        private static bool ConvertDeferredCosts(LogicCost lc, out Cost? cost)
+        {
+            if (lc is CappedIntCost cic)
+            {
+                cost = cic.GetIcCost();
+                return true;
+            }
+            cost = default;
+            return false;
         }
 
         private static void ApplyMiscLocationSettings(RequestBuilder rb)
@@ -104,7 +225,32 @@ namespace MoreLocations.Rando
 
         private static void ApplyLemmShopSettings(RequestBuilder rb)
         {
+            if (!RandoInterop.Enabled)
+            {
+                return;
+            }
 
+            // todo - make these numbers settings
+            for (int i = 0; i < 14; i++)
+            {
+                rb.AddItemByName(MoreItemNames.Wanderers_Journal_Sale);
+                rb.AddLocationByName(LocationNames.Lemm);
+            }
+            for (int i = 0; i < 17; i++)
+            {
+                rb.AddItemByName(MoreItemNames.Hallownest_Seal_Sale);
+                rb.AddLocationByName(LocationNames.Lemm);
+            }
+            for (int i = 0; i < 8; i++)
+            {
+                rb.AddItemByName(MoreItemNames.Kings_Idol_Sale);
+                rb.AddLocationByName(LocationNames.Lemm);
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                rb.AddItemByName(MoreItemNames.Arcane_Egg_Sale);
+                rb.AddLocationByName(LocationNames.Lemm);
+            }
         }
 
         private static void ApplyJunkShopSettings(RequestBuilder rb)
@@ -113,11 +259,6 @@ namespace MoreLocations.Rando
         }
 
         private static void DerangeLemmShop(RequestBuilder rb)
-        {
-
-        }
-
-        private static void ApplyDuplicateShopConstraint(RequestBuilder rb)
         {
 
         }

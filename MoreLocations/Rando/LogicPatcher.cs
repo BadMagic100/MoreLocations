@@ -1,4 +1,5 @@
-﻿using RandomizerCore.Logic;
+﻿using ItemChanger;
+using RandomizerCore.Logic;
 using RandomizerMod.RC;
 using RandomizerMod.Settings;
 using System.IO;
@@ -41,18 +42,17 @@ namespace MoreLocations.Rando
 
         private static void OverrideLemmUsages(LogicManagerBuilder lmb)
         {
-            // will cause issues until the correct changes are made RB-side
-            //string[] expensiveLocations = new string[] {
-            //    LocationNames.Unbreakable_Greed,
-            //    LocationNames.Unbreakable_Heart,
-            //    LocationNames.Unbreakable_Strength,
-            //    LocationNames.Dash_Slash,
-            //    LocationNames.Vessel_Fragment_Basin
-            //};
-            //foreach (string expensiveLocation in expensiveLocations)
-            //{
-            //    lmb.DoSubst(new RawSubstDef(expensiveLocation, "Can_Visit_Lemm", TermNames.LARGEGEODEPOSIT));
-            //}
+            string[] expensiveLocations = new string[] {
+                LocationNames.Unbreakable_Greed,
+                LocationNames.Unbreakable_Heart,
+                LocationNames.Unbreakable_Strength,
+                LocationNames.Dash_Slash,
+                LocationNames.Vessel_Fragment_Basin
+            };
+            foreach (string expensiveLocation in expensiveLocations)
+            {
+                lmb.DoSubst(new RawSubstDef(expensiveLocation, "Can_Visit_Lemm", TermNames.LARGEGEODEPOSIT));
+            }
         }
     }
 }

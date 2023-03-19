@@ -1,4 +1,5 @@
 ﻿using ItemChanger;
+using ItemChanger.Items;
 using ItemChanger.Locations;
 
 namespace MoreLocations.ItemChanger
@@ -10,6 +11,7 @@ namespace MoreLocations.ItemChanger
             DefineSwimLocation();
             DefineStagEggLocation();
             DefineBaldurShellChest();
+            DefineRelicSaleItems();
         }
 
         private static void DefineSwimLocation()
@@ -57,6 +59,23 @@ namespace MoreLocations.ItemChanger
                 nonreplaceable = true,
                 flingType = FlingType.Everywhere
             });
+        }
+
+        private static void DefineRelicSaleItems()
+        {
+            SpawnGeoItem wj = SpawnGeoItem.MakeGeoItem(200);
+            wj.name = MoreItemNames.Wanderers_Journal_Sale;
+            SpawnGeoItem hs = SpawnGeoItem.MakeGeoItem(450);
+            hs.name = MoreItemNames.Hallownest_Seal_Sale;
+            SpawnGeoItem ki = SpawnGeoItem.MakeGeoItem(800);
+            ki.name = MoreItemNames.Kings_Idol_Sale;
+            SpawnGeoItem ae = SpawnGeoItem.MakeGeoItem(1200);
+            ae.name = MoreItemNames.Arcane_Egg_Sale;
+
+            Finder.DefineCustomItem(wj);
+            Finder.DefineCustomItem(hs);
+            Finder.DefineCustomItem(ki);
+            Finder.DefineCustomItem(ae);
         }
     }
 }
