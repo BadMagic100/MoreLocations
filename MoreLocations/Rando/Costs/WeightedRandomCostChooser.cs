@@ -1,5 +1,4 @@
 ﻿using RandomizerCore.Logic;
-using RandomizerMod.RC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +17,7 @@ namespace MoreLocations.Rando.Costs
         private List<WeightedItem> children = new();
 
         public bool PreferNonEmptyProviders { get; set; } = true;
-        public bool ManagesChildFinalization { get; set; } = false;
+        public bool ManagesChildLifecycle { get; set; } = false;
 
         public bool HasNonFreeCostsAvailable => children.Any(x => x.Item.HasNonFreeCostsAvailable);
 
@@ -32,7 +31,7 @@ namespace MoreLocations.Rando.Costs
             children.Add(new(provider.GetWeight, provider));
         }
 
-        public LogicCost Next(LogicManager lm, Random rng, RandoModItem item)
+        public LogicCost Next(LogicManager lm, Random rng)
         {
             ICostProvider? provider = null;
             if (PreferNonEmptyProviders)
@@ -40,14 +39,14 @@ namespace MoreLocations.Rando.Costs
                 provider = SelectWeighted(rng, children.Where(x => x.Item.HasNonFreeCostsAvailable));
                 if (provider != null)
                 {
-                    return provider.Next(lm, rng, item);
+                    return provider.Next(lm, rng);
                 }
             }
 
             provider = SelectWeighted(rng, children);
             if (provider != null)
             {
-                return provider.Next(lm, rng, item);
+                return provider.Next(lm, rng);
             }
 
             throw new InvalidOperationException("Cannot select from a chooser with no children");
@@ -71,7 +70,7 @@ namespace MoreLocations.Rando.Costs
 
         public void FinishConstruction(Random rng)
         {
-            if (!ManagesChildFinalization)
+            if (!ManagesChildLifecycle)
             {
                 return;
             }

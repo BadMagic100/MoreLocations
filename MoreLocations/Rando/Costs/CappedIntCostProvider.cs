@@ -1,6 +1,5 @@
 ﻿using ItemChanger;
 using RandomizerCore.Logic;
-using RandomizerMod.RC;
 using System;
 using System.Collections.Generic;
 
@@ -19,6 +18,11 @@ namespace MoreLocations.Rando.Costs
 
         double IWeighted.GetWeight()
         {
+            // don't divide by 0
+            if (preferredMinCost == 0)
+            {
+                return 1.0;
+            }
             // uniformly weight when empty, otherwise weight according to how many costs of the preferred size are available
             return Math.Max(1.0, (double)capacity / preferredMinCost);
         }
@@ -35,7 +39,7 @@ namespace MoreLocations.Rando.Costs
 
         public bool HasNonFreeCostsAvailable => capacity > 0;
 
-        public LogicCost Next(LogicManager lm, Random rng, RandoModItem item)
+        public LogicCost Next(LogicManager lm, Random rng)
         {
             int amount = Math.Min(preferredMinCost, capacity);
             capacity -= amount;

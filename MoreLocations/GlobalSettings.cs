@@ -1,4 +1,4 @@
-﻿using MoreLocations.Rando;
+﻿using MoreLocations.Rando.Settings;
 
 namespace MoreLocations
 {

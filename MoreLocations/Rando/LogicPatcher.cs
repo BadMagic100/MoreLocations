@@ -10,10 +10,11 @@ namespace MoreLocations.Rando
     {
         public static void Hook()
         {
-            RCData.RuntimeLogicOverride.Subscribe(15f, ApplyLogic);
+            RCData.RuntimeLogicOverride.Subscribe(-1000f, DefineTermsAndLocations);
+            RCData.RuntimeLogicOverride.Subscribe(15f, PatchLogic);
         }
 
-        private static void ApplyLogic(GenerationSettings gs, LogicManagerBuilder lmb)
+        private static void DefineTermsAndLocations(GenerationSettings gs, LogicManagerBuilder lmb)
         {
             if (!RandoInterop.Enabled)
             {
@@ -22,6 +23,15 @@ namespace MoreLocations.Rando
 
             AddTermsAndItems(lmb);
             AddLocationLogic(lmb);
+        }
+
+        private static void PatchLogic(GenerationSettings gs, LogicManagerBuilder lmb)
+        {
+            if (!RandoInterop.Enabled)
+            {
+                return;
+            }
+
             OverrideLemmUsages(lmb);
         }
 

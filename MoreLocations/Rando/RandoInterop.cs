@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MoreLocations.Rando.Settings;
+using Newtonsoft.Json;
 using RandomizerMod.Logging;
 
 namespace MoreLocations.Rando

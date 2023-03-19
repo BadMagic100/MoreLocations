@@ -1,5 +1,4 @@
 ﻿using RandomizerCore.Logic;
-using RandomizerMod.RC;
 using System;
 
 namespace MoreLocations.Rando.Costs
@@ -17,7 +16,7 @@ namespace MoreLocations.Rando.Costs
 
         public bool HasNonFreeCostsAvailable => true;
 
-        public LogicCost Next(LogicManager lm, Random rng, RandoModItem item)
+        public LogicCost Next(LogicManager lm, Random rng)
         {
             return new SimpleCost(lm.GetTermStrict(term), rng.Next(min, max + 1));
         }
