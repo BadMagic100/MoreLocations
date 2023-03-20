@@ -52,6 +52,7 @@ namespace MoreLocations.Rando
 
         private static void OverrideLemmUsages(LogicManagerBuilder lmb)
         {
+            // even when lemm shop is not enabled, this should happen - we just need to define vanilla lemm placements in RB instead
             string[] expensiveLocations = new string[] {
                 LocationNames.Unbreakable_Greed,
                 LocationNames.Unbreakable_Heart,

@@ -6,6 +6,9 @@ using MoreLocations.Rando.Settings;
 using MoreLocations.Rando.Settings.Presets;
 using RandomizerMod;
 using RandomizerMod.Menu;
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using UnityEngine;
 
 namespace MoreLocations.Rando
@@ -18,6 +21,17 @@ namespace MoreLocations.Rando
         private MenuPage rootPage;
         private MenuElementFactory<RandomizerSettings> rootMef;
         private ToggleButton enableToggle;
+
+        // misc page
+
+        // lemm page
+        private SmallButton jumpToLemmPage;
+        private MenuElementFactory<LemmShopSettings> lemmShopRootMef;
+        private MenuElementFactory<RelicGeoSettings> relicGeoSettingsMef;
+        private MenuElementFactory<RelicCostSettings> relicCostSettingsMef;
+
+        // junk shop page
+
 
         public static void Hook()
         {
@@ -43,55 +57,64 @@ namespace MoreLocations.Rando
             rootMef = new MenuElementFactory<RandomizerSettings>(rootPage, RandoInterop.Settings);
             enableToggle = (ToggleButton) rootMef.ElementLookup[nameof(RandomizerSettings.Enabled)];
 
-            VerticalItemPanel vip = new(rootPage, SpaceParameters.TOP_CENTER_UNDER_TITLE, SpaceParameters.VSPACE_SMALL, true, enableToggle);
-
-            SmallButton jumpToLemmPage = new(rootPage, "Lemm Shop");
+            jumpToLemmPage = new(rootPage, "Lemm Shop");
             jumpToLemmPage.AddHideAndShowEvent(CreateLemmPage());
-            vip.Add(jumpToLemmPage);
 
-            vip.ResetNavigation();
+            VerticalItemPanel vip = new(rootPage, SpaceParameters.TOP_CENTER_UNDER_TITLE, SpaceParameters.VSPACE_SMALL, true, 
+                enableToggle,
+                jumpToLemmPage);
 
             rootButton = new(connectionPage, Localization.Localize("More Locations"));
             rootButton.AddHideAndShowEvent(connectionPage, rootPage);
-            connectionPage.BeforeShow += SetTopLevelButtonColor;
+            connectionPage.BeforeShow += SetTopLevelButtonColor(rootButton, () => RandoInterop.Settings.Enabled);
         }
 
+        [MemberNotNull(nameof(lemmShopRootMef), nameof(relicGeoSettingsMef), nameof(relicCostSettingsMef))]
         private MenuPage CreateLemmPage()
         {
             MenuPage lemmPage = new("Lemm Shop", rootPage);
 
-            // todo - enabled toggle
+            lemmShopRootMef = new(lemmPage, RandoInterop.Settings.LemmShopSettings);
 
-            MenuElementFactory<RelicGeoSettings> geoSettingsMef = new(lemmPage, RandoInterop.Settings.LemmShopSettings.GeoSettings);
+            relicGeoSettingsMef = new(lemmPage, RandoInterop.Settings.LemmShopSettings.GeoSettings);
             MenuPreset<RelicGeoSettings> geoSettingsPreset = new(lemmPage, "Relic Geo Items",
                 RelicGeoPresets.Presets, RandoInterop.Settings.LemmShopSettings.GeoSettings,
                 _ => "",
-                geoSettingsMef);
+                relicGeoSettingsMef);
             GridItemPanel geoSettingsHorizontalGrid = new(lemmPage, Vector2.zero, 4, 
                 0f, SpaceParameters.HSPACE_SMALL, false, 
-                geoSettingsMef.Elements);
+                relicGeoSettingsMef.Elements);
 
-            MenuElementFactory<RelicCostSettings> costSettingsMef = new(lemmPage, RandoInterop.Settings.LemmShopSettings.CostSettings);
+            relicCostSettingsMef = new(lemmPage, RandoInterop.Settings.LemmShopSettings.CostSettings);
             MenuPreset<RelicCostSettings> costSettingsPreset = new(lemmPage, "Relic Costs",
                 RelicCostPresets.Presets, RandoInterop.Settings.LemmShopSettings.CostSettings,
                 _ => "",
-                costSettingsMef);
+                relicCostSettingsMef);
             GridItemPanel costSettingsHorizontalGrid = new(lemmPage, Vector2.zero, 3,
                 SpaceParameters.VSPACE_MEDIUM, SpaceParameters.HSPACE_SMALL, false,
-                costSettingsMef.Elements);
+                relicCostSettingsMef.Elements);
 
-            VerticalItemPanel vip = new(lemmPage, SpaceParameters.TOP_CENTER_UNDER_TITLE, SpaceParameters.VSPACE_MEDIUM, true,
-                geoSettingsPreset, 
-                geoSettingsHorizontalGrid,
-                costSettingsPreset,
-                costSettingsHorizontalGrid);
+            IMenuElement[] vipElements = lemmShopRootMef.Elements.OfType<IMenuElement>()
+                .Append(geoSettingsPreset)
+                .Append(geoSettingsHorizontalGrid)
+                .Append(costSettingsPreset)
+                .Append(costSettingsHorizontalGrid)
+                .ToArray();
+
+            VerticalItemPanel vip = new(lemmPage, SpaceParameters.TOP_CENTER_UNDER_TITLE, SpaceParameters.VSPACE_MEDIUM,
+                true, vipElements);
+
+            rootPage.BeforeShow += SetTopLevelButtonColor(jumpToLemmPage, () => RandoInterop.Settings.LemmShopSettings.Enabled);
 
             return lemmPage;
         }
 
-        private void SetTopLevelButtonColor()
+        private Action SetTopLevelButtonColor(SmallButton target, Func<bool> condition)
         {
-            rootButton.Text.color = RandoInterop.Enabled ? Colors.TRUE_COLOR : Colors.DEFAULT_COLOR;
+            return () =>
+            {
+                target.Text.color = condition() ? Colors.TRUE_COLOR : Colors.DEFAULT_COLOR;
+            };
         }
     }
 }

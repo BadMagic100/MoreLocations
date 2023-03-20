@@ -8,6 +8,7 @@ namespace MoreLocations.Rando.Settings
         [MenuRange(0, 14)]
         public int MinimumJournalCost;
         [DynamicBound(nameof(MinimumJournalCost), false)]
+        [TriggerValidation(nameof(JournalTolerance))]
         [MenuRange(0, 14)]
         public int MaximumJournalCost;
         [DynamicBound(nameof(JournalToleranceUB), true)]
@@ -19,6 +20,7 @@ namespace MoreLocations.Rando.Settings
         [MenuRange(0, 17)]
         public int MinimumSealCost;
         [DynamicBound(nameof(MinimumSealCost), false)]
+        [TriggerValidation(nameof(SealTolerance))]
         [MenuRange(0, 17)]
         public int MaximumSealCost;
         [DynamicBound(nameof(SealToleranceUB), true)]
@@ -30,6 +32,7 @@ namespace MoreLocations.Rando.Settings
         [MenuRange(0, 8)]
         public int MinimumIdolCost;
         [DynamicBound(nameof(MinimumIdolCost), false)]
+        [TriggerValidation(nameof(IdolTolerance))]
         [MenuRange(0, 8)]
         public int MaximumIdolCost;
         [DynamicBound(nameof(IdolToleranceUB), true)]
@@ -41,6 +44,7 @@ namespace MoreLocations.Rando.Settings
         [MenuRange(0, 4)]
         public int MinimumEggCost;
         [DynamicBound(nameof(MinimumEggCost), false)]
+        [TriggerValidation(nameof(EggTolerance))]
         [MenuRange(0, 4)]
         public int MaximumEggCost;
         [DynamicBound(nameof(EggToleranceUB), true)]
