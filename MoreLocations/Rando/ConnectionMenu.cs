@@ -23,6 +23,8 @@ namespace MoreLocations.Rando
         private ToggleButton enableToggle;
 
         // misc page
+        private SmallButton jumpToMiscPage;
+        private MenuElementFactory<MiscLocationSettings> miscLocationMef;
 
         // lemm page
         private SmallButton jumpToLemmPage;
@@ -52,27 +54,55 @@ namespace MoreLocations.Rando
 
         public ConnectionMenu(MenuPage connectionPage)
         {
-            rootPage = new MenuPage(Localization.Localize("More Locations"), connectionPage);
+            rootPage = new MenuPage("MoreLocations", connectionPage);
+
+            MenuLabel header = new(rootPage, "MoreLocations");
+            header.MoveTo(SpaceParameters.TOP_CENTER);
 
             rootMef = new MenuElementFactory<RandomizerSettings>(rootPage, RandoInterop.Settings);
             enableToggle = (ToggleButton) rootMef.ElementLookup[nameof(RandomizerSettings.Enabled)];
+
+            jumpToMiscPage = new(rootPage, "Miscellaneous Locations");
+            jumpToMiscPage.AddHideAndShowEvent(CreateMiscPage());
 
             jumpToLemmPage = new(rootPage, "Lemm Shop");
             jumpToLemmPage.AddHideAndShowEvent(CreateLemmPage());
 
             VerticalItemPanel vip = new(rootPage, SpaceParameters.TOP_CENTER_UNDER_TITLE, SpaceParameters.VSPACE_SMALL, true, 
                 enableToggle,
+                jumpToMiscPage,
                 jumpToLemmPage);
 
-            rootButton = new(connectionPage, Localization.Localize("More Locations"));
+            rootButton = new(connectionPage, Localization.Localize("MoreLocations"));
             rootButton.AddHideAndShowEvent(connectionPage, rootPage);
             connectionPage.BeforeShow += SetTopLevelButtonColor(rootButton, () => RandoInterop.Settings.Enabled);
+        }
+
+        [MemberNotNull(nameof(miscLocationMef))]
+        private MenuPage CreateMiscPage()
+        {
+            MenuPage miscPage = new("Miscellaneous Locations", rootPage);
+
+            MenuLabel header = new(miscPage, "MoreLocations - Misc. Locations");
+            header.MoveTo(SpaceParameters.TOP_CENTER);
+
+            miscLocationMef = new(miscPage, RandoInterop.Settings.MiscLocationSettings);
+
+            VerticalItemPanel vip = new(miscPage, SpaceParameters.TOP_CENTER_UNDER_TITLE, SpaceParameters.VSPACE_SMALL,
+                true, miscLocationMef.Elements);
+
+            rootPage.BeforeShow += SetTopLevelButtonColor(jumpToMiscPage, () => RandoInterop.Settings.MiscLocationSettings.Any);
+
+            return miscPage;
         }
 
         [MemberNotNull(nameof(lemmShopRootMef), nameof(relicGeoSettingsMef), nameof(relicCostSettingsMef))]
         private MenuPage CreateLemmPage()
         {
             MenuPage lemmPage = new("Lemm Shop", rootPage);
+
+            MenuLabel header = new(lemmPage, "MoreLocations - Lemm");
+            header.MoveTo(SpaceParameters.TOP_CENTER);
 
             lemmShopRootMef = new(lemmPage, RandoInterop.Settings.LemmShopSettings);
 

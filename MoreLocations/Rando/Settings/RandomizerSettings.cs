@@ -4,6 +4,8 @@
     {
         public bool Enabled { get; set; } = false;
 
+        public MiscLocationSettings MiscLocationSettings { get; set; } = new();
+
         public LemmShopSettings LemmShopSettings { get; set; } = new();
     }
 }

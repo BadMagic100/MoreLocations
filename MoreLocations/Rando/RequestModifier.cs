@@ -149,6 +149,37 @@ namespace MoreLocations.Rando
             {
                 return;
             }
+
+            rb.EditLocationRequest(MoreLocationNames.Swim, info =>
+            {
+                info.getLocationDef = () => new()
+                {
+                    Name = MoreLocationNames.Swim,
+                    SceneName = SceneNames.Crossroads_50,
+                    FlexibleCount = false,
+                    AdditionalProgressionPenalty = false,
+                };
+            });
+            rb.EditLocationRequest(MoreLocationNames.Stag_Nest_Egg, info =>
+            {
+                info.getLocationDef = () => new()
+                {
+                    Name = MoreLocationNames.Stag_Nest_Egg,
+                    SceneName = SceneNames.Cliffs_03,
+                    FlexibleCount = false,
+                    AdditionalProgressionPenalty = false,
+                };
+            });
+            rb.EditLocationRequest(MoreLocationNames.Geo_Chest_Above_Baldur_Shell, info =>
+            {
+                info.getLocationDef = () => new()
+                {
+                    Name = MoreLocationNames.Geo_Chest_Above_Baldur_Shell,
+                    SceneName = SceneNames.Fungus1_28,
+                    FlexibleCount = false,
+                    AdditionalProgressionPenalty = false,
+                };
+            });
         }
 
         private static void SetupLemmRefs(RequestBuilder rb)
@@ -312,7 +343,23 @@ namespace MoreLocations.Rando
 
         private static void ApplyMiscLocationSettings(RequestBuilder rb)
         {
+            if (!RandoInterop.Enabled)
+            {
+                return;
+            }
 
+            if (RandoInterop.Settings.MiscLocationSettings.Swim)
+            {
+                rb.AddLocationByName(MoreLocationNames.Swim);
+            }
+            if (RandoInterop.Settings.MiscLocationSettings.StagNestEgg)
+            {
+                rb.AddLocationByName(MoreLocationNames.Stag_Nest_Egg);
+            }
+            if (RandoInterop.Settings.MiscLocationSettings.BaldurShellChest)
+            {
+                rb.AddLocationByName(MoreLocationNames.Geo_Chest_Above_Baldur_Shell);
+            }
         }
 
         private static void ApplyLemmShopSettings(RequestBuilder rb)
