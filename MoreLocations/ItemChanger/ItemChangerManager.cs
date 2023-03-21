@@ -12,6 +12,7 @@ namespace MoreLocations.ItemChanger
             DefineStagEggLocation();
             DefineBaldurShellChest();
             DefineRelicSaleItems();
+            DefineJunkShopLocation();
         }
 
         private static void DefineSwimLocation()
@@ -76,6 +77,21 @@ namespace MoreLocations.ItemChanger
             Finder.DefineCustomItem(hs);
             Finder.DefineCustomItem(ki);
             Finder.DefineCustomItem(ae);
+        }
+
+        private static void DefineJunkShopLocation()
+        {
+            CustomShopLocation junkShop = new()
+            {
+                name = MoreLocationNames.Junk_Shop,
+                sceneName = SceneNames.Room_GG_Shortcut,
+                objectName = "Fluke Hermit",
+                fsmName = "npc_control",
+                // outOfStockConvo = ...
+                dungDiscount = false,
+                facingDirection = FacingDirection.Left
+            };
+            Finder.DefineCustomLocation(junkShop);
         }
     }
 }

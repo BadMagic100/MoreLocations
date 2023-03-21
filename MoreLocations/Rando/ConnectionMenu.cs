@@ -33,7 +33,9 @@ namespace MoreLocations.Rando
         private MenuElementFactory<RelicCostSettings> relicCostSettingsMef;
 
         // junk shop page
-
+        private SmallButton jumpToJunkShopPage;
+        private MenuElementFactory<JunkShopSettings> junkShopRootMef;
+        private MenuElementFactory<JunkCostSettings> junkCostSettingsMef;
 
         public static void Hook()
         {
@@ -68,10 +70,14 @@ namespace MoreLocations.Rando
             jumpToLemmPage = new(rootPage, "Lemm Shop");
             jumpToLemmPage.AddHideAndShowEvent(CreateLemmPage());
 
+            jumpToJunkShopPage = new(rootPage, "Junk Shop");
+            jumpToJunkShopPage.AddHideAndShowEvent(CreateJunkShopPage());
+
             VerticalItemPanel vip = new(rootPage, SpaceParameters.TOP_CENTER_UNDER_TITLE, SpaceParameters.VSPACE_SMALL, true, 
                 enableToggle,
                 jumpToMiscPage,
-                jumpToLemmPage);
+                jumpToLemmPage,
+                jumpToJunkShopPage);
 
             rootButton = new(connectionPage, Localization.Localize("MoreLocations"));
             rootButton.AddHideAndShowEvent(connectionPage, rootPage);
@@ -137,6 +143,38 @@ namespace MoreLocations.Rando
             rootPage.BeforeShow += SetTopLevelButtonColor(jumpToLemmPage, () => RandoInterop.Settings.LemmShopSettings.Enabled);
 
             return lemmPage;
+        }
+
+        [MemberNotNull(nameof(junkShopRootMef), nameof(junkCostSettingsMef))]
+        private MenuPage CreateJunkShopPage()
+        {
+            MenuPage junkShopPage = new("Junk Shop", rootPage);
+
+            MenuLabel header = new(junkShopPage, "MoreLocations - Junk Shop");
+            header.MoveTo(SpaceParameters.TOP_CENTER);
+
+            junkShopRootMef = new(junkShopPage, RandoInterop.Settings.JunkShopSettings);
+
+            junkCostSettingsMef = new(junkShopPage, RandoInterop.Settings.JunkShopSettings.CostSettings);
+            MenuPreset<JunkCostSettings> costSettingsPreset = new(junkShopPage, "Junk Costs",
+                JunkShopCostPresets.Presets, RandoInterop.Settings.JunkShopSettings.CostSettings,
+                _ => "",
+                junkCostSettingsMef);
+            GridItemPanel costSettingsHorizontalGrid = new(junkShopPage, Vector2.zero, 2,
+                SpaceParameters.VSPACE_MEDIUM, SpaceParameters.HSPACE_SMALL, false,
+                junkCostSettingsMef.Elements);
+
+            IMenuElement[] vipElements = junkShopRootMef.Elements.OfType<IMenuElement>()
+                .Append(costSettingsPreset)
+                .Append(costSettingsHorizontalGrid)
+                .ToArray();
+
+            VerticalItemPanel vip = new(junkShopPage, SpaceParameters.TOP_CENTER_UNDER_TITLE, SpaceParameters.VSPACE_MEDIUM,
+                true, vipElements);
+
+            rootPage.BeforeShow += SetTopLevelButtonColor(jumpToJunkShopPage, () => RandoInterop.Settings.JunkShopSettings.Enabled);
+
+            return junkShopPage;
         }
 
         private Action SetTopLevelButtonColor(SmallButton target, Func<bool> condition)

@@ -15,7 +15,7 @@ namespace MoreLocations.Rando.Costs
             const double pow = 1.2;
 
             // todo - figure out how to get into the post-randomize hook without breaking other provider types
-            amount = 0;
+            amount = 1;
             //int cap = item.ItemDef is not null ? item.ItemDef.PriceCap : 500;
             //if (cap <= 100)
             //{

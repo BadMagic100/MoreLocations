@@ -7,5 +7,7 @@
         public MiscLocationSettings MiscLocationSettings { get; set; } = new();
 
         public LemmShopSettings LemmShopSettings { get; set; } = new();
+
+        public JunkShopSettings JunkShopSettings { get; set; } = new();
     }
 }

@@ -299,6 +299,17 @@ namespace MoreLocations.Rando
             {
                 return;
             }
+
+            rb.EditLocationRequest(MoreLocationNames.Junk_Shop, info =>
+            {
+                info.getLocationDef = () => new LocationDef()
+                {
+                    Name = MoreLocationNames.Junk_Shop,
+                    SceneName = SceneNames.Room_GG_Shortcut,
+                    FlexibleCount = true,
+                    AdditionalProgressionPenalty = true,
+                };
+            });
         }
 
         private static void ApplyShopCostRandomization(RequestBuilder rb)
@@ -326,6 +337,22 @@ namespace MoreLocations.Rando
                         return;
                     }
                     rl.AddCost(relicCostProvider.Next(factory.lm, factory.rng));
+                };
+            });
+            rb.EditLocationRequest(MoreLocationNames.Junk_Shop, info =>
+            {
+                info.onRandoLocationCreation += (factory, rl) =>
+                {
+                    if (anyCostProvider == null)
+                    {
+                        return;
+                    }
+                    int numCosts = rb.rng.Next(RandoInterop.Settings.JunkShopSettings.CostSettings.MinimumCostsPerItem,
+                        RandoInterop.Settings.JunkShopSettings.CostSettings.MaximumCostsPerItem + 1);
+                    for (int i = 0; i < numCosts; i++)
+                    {
+                        rl.AddCost(anyCostProvider.Next(factory.lm, factory.rng));
+                    }
                 };
             });
         }
@@ -409,7 +436,12 @@ namespace MoreLocations.Rando
 
         private static void ApplyJunkShopSettings(RequestBuilder rb)
         {
+            if (!RandoInterop.Enabled || !RandoInterop.Settings.JunkShopSettings.Enabled)
+            {
+                return;
+            }
 
+            rb.AddLocationByName(MoreLocationNames.Junk_Shop);
         }
 
         private static void DerangeLemmShop(RequestBuilder rb)
