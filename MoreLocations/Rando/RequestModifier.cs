@@ -8,6 +8,7 @@ using RandomizerMod.RC;
 using RandomizerMod.Settings;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MoreLocations.Rando
 {
@@ -102,10 +103,10 @@ namespace MoreLocations.Rando
             }
         }
 
-        private static void TearDownCostManagement(RequestBuilder rb)
+        private static void PreRandomizeCostsAndCleanUp(RequestBuilder rb)
         {
-            relicCostProvider?.FinishConstruction(rb.rng);
-            anyCostProvider?.FinishConstruction(rb.rng);
+            relicCostProvider?.PreRandomize(rb.rng);
+            anyCostProvider?.PreRandomize(rb.rng);
 
             relicCostProvider = null;
             anyCostProvider = null;
@@ -319,7 +320,7 @@ namespace MoreLocations.Rando
             {
                 if (eventType == RandoEventType.Initializing)
                 {
-                    TearDownCostManagement(rb);
+                    PreRandomizeCostsAndCleanUp(rb);
                 }
             };
 
@@ -351,7 +352,32 @@ namespace MoreLocations.Rando
                         RandoInterop.Settings.JunkShopSettings.CostSettings.MaximumCostsPerItem + 1);
                     for (int i = 0; i < numCosts; i++)
                     {
-                        rl.AddCost(anyCostProvider.Next(factory.lm, factory.rng));
+                        try
+                        {
+                            rl.AddCost(anyCostProvider.SelectWithoutReplacement(factory.lm, factory.rng));
+                        } 
+                        catch (InvalidOperationException)
+                        {
+                            // this is totally fine - it just means that the user requested more costs than we could give them;
+                            // we don't need to fail out but we can stop trying to add more.
+                            MoreLocationsMod.Instance.LogWarn($"Exhausted all {i} available cost types selecting " +
+                                $"costs for an item at {MoreLocationNames.Junk_Shop}.");
+                            break;
+                        }
+                    }
+                    anyCostProvider.ResetAvailablePool();
+                };
+                info.onRandomizerFinish += placement =>
+                {
+                    if (placement.Location is not RandoModLocation rl 
+                        || placement.Item is not RandoModItem ri 
+                        || rl.costs == null)
+                    {
+                        return;
+                    }
+                    foreach (ProvidedGeoCost gc in rl.costs.OfType<ProvidedGeoCost>())
+                    {
+                        gc.PostRandomize(rb.rng, ri);
                     }
                 };
             });

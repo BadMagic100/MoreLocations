@@ -9,6 +9,6 @@ namespace MoreLocations.Rando.Costs
 
         LogicCost Next(LogicManager lm, Random rng);
 
-        void FinishConstruction(Random rng);
+        void PreRandomize(Random rng);
     }
 }

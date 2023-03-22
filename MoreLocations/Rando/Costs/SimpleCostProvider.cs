@@ -21,6 +21,6 @@ namespace MoreLocations.Rando.Costs
             return new SimpleCost(lm.GetTermStrict(term), rng.Next(min, max + 1));
         }
 
-        public void FinishConstruction(Random rng) { }
+        public void PreRandomize(Random rng) { }
     }
 }

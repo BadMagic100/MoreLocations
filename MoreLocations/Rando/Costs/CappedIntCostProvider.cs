@@ -48,7 +48,7 @@ namespace MoreLocations.Rando.Costs
             return c;
         }
 
-        public void FinishConstruction(Random rng)
+        public void PreRandomize(Random rng)
         {
             // pick a random amount of the remaining capacity (max total value) to distribute back down to the generated costs
             int capacityToDistribute = rng.Next(capacity + 1);
