@@ -6,14 +6,14 @@ using System;
 
 namespace MoreLocations.Rando.Costs
 {
-    public class ProvidedGeoCost : LogicGeoCost
+    public class IPostRandomizedCost : LogicGeoCost, IPostRandomizedCost
     {
         [JsonConstructor]
-        public ProvidedGeoCost()
+        public IPostRandomizedCost()
         {
         }
 
-        public ProvidedGeoCost(LogicManager lm) : base(lm, -1)
+        public IPostRandomizedCost(LogicManager lm) : base(lm, -1)
         {
         }
 
@@ -53,7 +53,7 @@ namespace MoreLocations.Rando.Costs
 
         public LogicCost Next(LogicManager lm, Random rng)
         {
-            return new ProvidedGeoCost(lm);
+            return new IPostRandomizedCost(lm);
         }
 
         public void PreRandomize(Random rng) { }

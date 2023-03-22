@@ -375,9 +375,9 @@ namespace MoreLocations.Rando
                     {
                         return;
                     }
-                    foreach (ProvidedGeoCost gc in rl.costs.OfType<ProvidedGeoCost>())
+                    foreach (IPostRandomizedCost prc in rl.costs.OfType<IPostRandomizedCost>())
                     {
-                        gc.PostRandomize(rb.rng, ri);
+                        prc.PostRandomize(rb.rng, ri);
                     }
                 };
             });
