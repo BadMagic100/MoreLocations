@@ -104,6 +104,14 @@ namespace MoreLocations.Rando
                 anyCostProvider.AddFixedWeight(1.0,
                     new SimpleCostProvider("RANCIDEGGS", rb.gs.CostSettings.MinimumEggCost, rb.gs.CostSettings.MaximumEggCost));
             }
+
+            IEnumerable<ICostProvider> connectionAddedProviders = ConnectionInterop.costProviders
+                .Where(p => p.include())
+                .Select(p => p.providerFactory());
+            foreach (ICostProvider provider in connectionAddedProviders)
+            {
+                anyCostProvider.AddFixedWeight(1, provider);
+            }
         }
 
         private static void PreRandomizeCostsAndCleanUp(RequestBuilder rb)
@@ -364,6 +372,20 @@ namespace MoreLocations.Rando
             });
             rb.EditLocationRequest(MoreLocationNames.Junk_Shop, info =>
             {
+                info.customPlacementFetch += (factory, rp) =>
+                {
+                    if (factory.TryFetchPlacement(rp.Location.Name, out AbstractPlacement plt))
+                    {
+                        return plt;
+                    }
+
+                    ShopLocation loc = (ShopLocation)factory.MakeLocation(rp.Location.Name);
+                    MixedCostDisplayerSelectionStrategy cdss = (MixedCostDisplayerSelectionStrategy)loc.costDisplayerSelectionStrategy;
+                    cdss.Capabilities.AddRange(ConnectionInterop.costSupportCapabilities);
+                    plt = loc.Wrap();
+                    factory.AddPlacement(plt);
+                    return plt;
+                };
                 info.onRandoLocationCreation += (factory, rl) =>
                 {
                     if (anyCostProvider == null)
