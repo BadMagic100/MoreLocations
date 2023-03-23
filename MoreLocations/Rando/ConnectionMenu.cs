@@ -82,6 +82,14 @@ namespace MoreLocations.Rando
             rootButton = new(connectionPage, Localization.Localize("MoreLocations"));
             rootButton.AddHideAndShowEvent(connectionPage, rootPage);
             connectionPage.BeforeShow += SetTopLevelButtonColor(rootButton, () => RandoInterop.Settings.Enabled);
+
+            Localization.Localize(header);
+            Localization.Localize(rootMef);
+            Localization.Localize(enableToggle);
+            Localization.Localize(jumpToMiscPage);
+            Localization.Localize(jumpToLemmPage);
+            Localization.Localize(jumpToJunkShopPage);
+            Localization.Localize(rootButton);
         }
 
         [MemberNotNull(nameof(miscLocationMef))]
@@ -98,6 +106,9 @@ namespace MoreLocations.Rando
                 true, miscLocationMef.Elements);
 
             rootPage.BeforeShow += SetTopLevelButtonColor(jumpToMiscPage, () => RandoInterop.Settings.MiscLocationSettings.Any);
+
+            Localization.Localize(header);
+            Localization.Localize(miscLocationMef);
 
             return miscPage;
         }
@@ -142,6 +153,13 @@ namespace MoreLocations.Rando
 
             rootPage.BeforeShow += SetTopLevelButtonColor(jumpToLemmPage, () => RandoInterop.Settings.LemmShopSettings.Enabled);
 
+            Localization.Localize(header);
+            Localization.Localize(lemmShopRootMef);
+            Localization.Localize(relicGeoSettingsMef);
+            Localization.Localize(geoSettingsPreset);
+            Localization.Localize(relicCostSettingsMef);
+            Localization.Localize(costSettingsPreset);
+
             return lemmPage;
         }
 
@@ -173,6 +191,11 @@ namespace MoreLocations.Rando
                 true, vipElements);
 
             rootPage.BeforeShow += SetTopLevelButtonColor(jumpToJunkShopPage, () => RandoInterop.Settings.JunkShopSettings.Enabled);
+
+            Localization.Localize(header);
+            Localization.Localize(junkShopRootMef);
+            Localization.Localize(junkCostSettingsMef);
+            Localization.Localize(costSettingsPreset);
 
             return junkShopPage;
         }
