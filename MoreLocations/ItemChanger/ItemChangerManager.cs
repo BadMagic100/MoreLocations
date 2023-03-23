@@ -1,6 +1,7 @@
 ﻿using ItemChanger;
 using ItemChanger.Items;
 using ItemChanger.Locations;
+using MoreLocations.ItemChanger.CostIconSupport;
 
 namespace MoreLocations.ItemChanger
 {
@@ -87,9 +88,18 @@ namespace MoreLocations.ItemChanger
                 sceneName = SceneNames.Room_GG_Shortcut,
                 objectName = "Fluke Hermit",
                 fsmName = "npc_control",
-                // outOfStockConvo = ...
                 dungDiscount = false,
-                facingDirection = FacingDirection.Left
+                facingDirection = FacingDirection.Left,
+                costDisplayerSelectionStrategy = new MixedCostDisplayerSelectionStrategy()
+                {
+                    Capabilities =
+                    {
+                        new RelicCostSupport(),
+                        new CumulativeIntCostSupport(nameof(PlayerData.grubsCollected), "ShopIcons.Grub"),
+                        new CumulativeIntCostSupport(nameof(PlayerData.dreamOrbs), "ShopIcons.Essence"),
+                        new EggCostSupport()
+                    }
+                }
             };
             Finder.DefineCustomLocation(junkShop);
         }

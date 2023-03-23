@@ -1,4 +1,7 @@
 ﻿using ItemChanger;
+using ItemChanger.Locations;
+using MoreLocations.ItemChanger;
+using MoreLocations.ItemChanger.CostIconSupport;
 using MoreLocations.Rando.Costs;
 using RandomizerCore;
 using RandomizerCore.Logic;
@@ -51,7 +54,7 @@ namespace MoreLocations.Rando
                 amount =>
             {
                 string suffix = amount == 1 ? "" : "s";
-                return new ConsumablePDIntCost(amount, nameof(PlayerData.trinket1), $"{amount} Wanderer's Journal{suffix}");
+                return new ConsumablePDIntCost(amount, nameof(PlayerData.trinket1), $"Trade {amount} Wanderer's Journal{suffix}");
             }));
             relicCostProvider.AddDynamicWeight(new CappedIntCostProvider("HALLOWNESTSEALS",
                 RandoInterop.Settings.LemmShopSettings.CostSettings.MinimumSealCost,
@@ -59,7 +62,7 @@ namespace MoreLocations.Rando
                 amount =>
             {
                 string suffix = amount == 1 ? "" : "s";
-                return new ConsumablePDIntCost(amount, nameof(PlayerData.trinket2), $"{amount} Hallownest Seal{suffix}");
+                return new ConsumablePDIntCost(amount, nameof(PlayerData.trinket2), $"Trade {amount} Hallownest Seal{suffix}");
             }));
             relicCostProvider.AddDynamicWeight(new CappedIntCostProvider("KINGSIDOLS", 
                 RandoInterop.Settings.LemmShopSettings.CostSettings.MinimumIdolCost,
@@ -67,7 +70,7 @@ namespace MoreLocations.Rando
                 amount =>
             {
                 string suffix = amount == 1 ? "" : "s";
-                return new ConsumablePDIntCost(amount, nameof(PlayerData.trinket3), $"{amount} King's Idol{suffix}");
+                return new ConsumablePDIntCost(amount, nameof(PlayerData.trinket3), $"Trade {amount} King's Idol{suffix}");
             }));
             relicCostProvider.AddDynamicWeight(new CappedIntCostProvider("ARCANEEGGS", 
                 RandoInterop.Settings.LemmShopSettings.CostSettings.MinimumEggCost, 
@@ -75,7 +78,7 @@ namespace MoreLocations.Rando
                 amount =>
             {
                 string suffix = amount == 1 ? "" : "s";
-                return new ConsumablePDIntCost(amount, nameof(PlayerData.trinket4), $"{amount} Arcane Egg{suffix}");
+                return new ConsumablePDIntCost(amount, nameof(PlayerData.trinket4), $"Trade {amount} Arcane Egg{suffix}");
             }));
 
             anyCostProvider = new WeightedRandomCostChooser()
@@ -331,6 +334,25 @@ namespace MoreLocations.Rando
 
             rb.EditLocationRequest(LocationNames.Lemm, info =>
             {
+                info.customPlacementFetch += (factory, rp) =>
+                {
+                    if (factory.TryFetchPlacement(rp.Location.Name, out AbstractPlacement plt))
+                    {
+                        return plt;
+                    }
+
+                    ShopLocation loc = (ShopLocation)factory.MakeLocation(rp.Location.Name);
+                    loc.costDisplayerSelectionStrategy = new MixedCostDisplayerSelectionStrategy()
+                    {
+                        Capabilities =
+                        {
+                            new RelicCostSupport()
+                        }
+                    };
+                    plt = loc.Wrap();
+                    factory.AddPlacement(plt);
+                    return plt;
+                };
                 info.onRandoLocationCreation += (factory, rl) =>
                 {
                     if (relicCostProvider == null)
