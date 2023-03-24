@@ -32,7 +32,14 @@ namespace MoreLocations.ItemChanger
                 sceneName = SceneNames.Crossroads_50,
                 trueLocation = quirrelDrownedLocation,
                 falseLocation = new EmptyLocation(),
-                Test = new PDBool(nameof(PlayerData.quirrelEpilogueCompleted))
+                Test = new PDBool(nameof(PlayerData.quirrelEpilogueCompleted)),
+                tags = new()
+                {
+                    InteropTagFactory.CmiLocationTag(poolGroup: "Skills", mapLocations: new[]
+                    {
+                        (SceneNames.Crossroads_50, 1.7f, -0.1f)
+                    })
+                }
             });
         }
 
@@ -45,7 +52,14 @@ namespace MoreLocations.ItemChanger
                 x = 96.3f,
                 y = 46.4f,
                 elevation = 0,
-                flingType = FlingType.Everywhere
+                flingType = FlingType.Everywhere,
+                tags = new()
+                {
+                    InteropTagFactory.CmiLocationTag(poolGroup: "LoreTablets", mapLocations: new[]
+                    {
+                        (SceneNames.Cliffs_02, -2.3f, 1.3f)
+                    })
+                }
             });
         }
 
@@ -59,7 +73,14 @@ namespace MoreLocations.ItemChanger
                 fsmName = "Chest Control",
                 containerType = Container.Chest,
                 nonreplaceable = true,
-                flingType = FlingType.Everywhere
+                flingType = FlingType.Everywhere,
+                tags = new()
+                {
+                    InteropTagFactory.CmiLocationTag(poolGroup: "GeoChests", mapLocations: new[]
+                    {
+                        (SceneNames.Fungus1_28, 0.1f, -0.1f)
+                    })
+                }
             });
         }
 
@@ -67,12 +88,28 @@ namespace MoreLocations.ItemChanger
         {
             SpawnGeoItem wj = SpawnGeoItem.MakeGeoItem(200);
             wj.name = MoreItemNames.Wanderers_Journal_Sale;
+            wj.tags = new()
+            {
+                InteropTagFactory.CmiSharedTag("RelicSales")
+            };
             SpawnGeoItem hs = SpawnGeoItem.MakeGeoItem(450);
             hs.name = MoreItemNames.Hallownest_Seal_Sale;
+            hs.tags = new()
+            {
+                InteropTagFactory.CmiSharedTag("RelicSales")
+            };
             SpawnGeoItem ki = SpawnGeoItem.MakeGeoItem(800);
             ki.name = MoreItemNames.Kings_Idol_Sale;
+            ki.tags = new()
+            {
+                InteropTagFactory.CmiSharedTag("RelicSales")
+            };
             SpawnGeoItem ae = SpawnGeoItem.MakeGeoItem(1200);
             ae.name = MoreItemNames.Arcane_Egg_Sale;
+            ae.tags = new()
+            {
+                InteropTagFactory.CmiSharedTag("RelicSales")
+            };
 
             Finder.DefineCustomItem(wj);
             Finder.DefineCustomItem(hs);
@@ -99,6 +136,13 @@ namespace MoreLocations.ItemChanger
                         new CumulativeIntCostSupport(nameof(PlayerData.dreamOrbs), "ShopIcons.Essence"),
                         new EggCostSupport()
                     }
+                },
+                tags = new()
+                {
+                    InteropTagFactory.CmiLocationTag(poolGroup: "Shops", mapLocations: new[]
+                    {
+                        (SceneNames.GG_Waterways, 0.7f, 0.6f)
+                    })
                 }
             };
             Finder.DefineCustomLocation(junkShop);

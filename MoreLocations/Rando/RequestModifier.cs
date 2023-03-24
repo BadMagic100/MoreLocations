@@ -38,6 +38,8 @@ namespace MoreLocations.Rando
             RequestBuilder.OnUpdate.Subscribe(0f, ApplyLemmShopSettings);
             RequestBuilder.OnUpdate.Subscribe(0f, ApplyJunkShopSettings);
 
+            RequestBuilder.OnUpdate.Subscribe(20f, HandleJunkItemRemove);
+
             RequestBuilder.OnUpdate.Subscribe(100f, DerangeLemmShop);
         }
 
@@ -512,6 +514,31 @@ namespace MoreLocations.Rando
             }
 
             rb.AddLocationByName(MoreLocationNames.Junk_Shop);
+        }
+
+        private static void HandleJunkItemRemove(RequestBuilder rb)
+        {
+            // if lemm shop isn't active, we don't care what base rando does. If junk isn't being removed
+            // aren't randomized, we don't need to put relics back because they never left
+            if (!RandoInterop.Enabled || !RandoInterop.Settings.LemmShopSettings.Enabled 
+                || !rb.gs.CursedSettings.ReplaceJunkWithOneGeo)
+            {
+                return;
+            }
+
+            // also if relics aren't randomized they never got removed either
+            if (rb.gs.PoolSettings.Relics)
+            {
+                rb.AddItemByName(ItemNames.Wanderers_Journal, 14);
+                rb.AddItemByName(ItemNames.Hallownest_Seal, 17);
+                rb.AddItemByName(ItemNames.Kings_Idol, 8);
+                rb.AddItemByName(ItemNames.Arcane_Egg, 4);
+            }
+
+            rb.RemoveItemByName(MoreItemNames.Wanderers_Journal_Sale);
+            rb.RemoveItemByName(MoreItemNames.Hallownest_Seal_Sale);
+            rb.RemoveItemByName(MoreItemNames.Kings_Idol_Sale);
+            rb.RemoveItemByName(MoreItemNames.Arcane_Egg_Sale);
         }
 
         private static void DerangeLemmShop(RequestBuilder rb)
