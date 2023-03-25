@@ -14,9 +14,10 @@ namespace MoreLocations.ItemChanger
 
         private const string CmiModSourceProperty = "ModSource";
         private const string CmiPoolGroupProperty = "PoolGroup";
+        private const string CmiPinSpriteKeyProperty = "PinSpriteKey";
         private const string CmiMapLocationsProperty = "MapLocations";
 
-        public static InteropTag CmiSharedTag(string? poolGroup = null)
+        public static InteropTag CmiSharedTag(string? poolGroup = null, string? pinSpriteKey = null)
         {
             InteropTag t = new()
             {
@@ -27,12 +28,14 @@ namespace MoreLocations.ItemChanger
                 }
             };
             t.SetProperty(CmiPoolGroupProperty, poolGroup);
+            t.SetProperty(CmiPinSpriteKeyProperty, pinSpriteKey);
             return t;
         }
 
-        public static InteropTag CmiLocationTag(string? poolGroup = null, (string, float, float)[]? mapLocations = null)
+        public static InteropTag CmiLocationTag(string? poolGroup = null, string? pinSpriteKey = null,
+            (string, float, float)[]? mapLocations = null)
         {
-            InteropTag t = CmiSharedTag(poolGroup: poolGroup);
+            InteropTag t = CmiSharedTag(poolGroup: poolGroup, pinSpriteKey: pinSpriteKey);
             t.SetProperty(CmiMapLocationsProperty, mapLocations);
             return t;
         }

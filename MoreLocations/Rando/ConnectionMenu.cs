@@ -207,5 +207,24 @@ namespace MoreLocations.Rando
                 target.Text.color = condition() ? Colors.TRUE_COLOR : Colors.DEFAULT_COLOR;
             };
         }
+
+        public void Apply(RandomizerSettings settings)
+        {
+            rootMef.SetMenuValues(settings);
+
+            miscLocationMef.SetMenuValues(settings.MiscLocationSettings);
+
+            lemmShopRootMef.SetMenuValues(settings.LemmShopSettings);
+            relicGeoSettingsMef.SetMenuValues(settings.LemmShopSettings.GeoSettings);
+            relicCostSettingsMef.SetMenuValues(settings.LemmShopSettings.CostSettings);
+
+            junkShopRootMef.SetMenuValues(settings.JunkShopSettings);
+            junkCostSettingsMef.SetMenuValues(settings.JunkShopSettings.CostSettings);
+        }
+
+        public void Disable()
+        {
+            enableToggle.SetValue(false);
+        }
     }
 }

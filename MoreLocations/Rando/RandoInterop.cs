@@ -1,4 +1,5 @@
-﻿using MoreLocations.Rando.Settings;
+﻿using Modding;
+using MoreLocations.Rando.Settings;
 using Newtonsoft.Json;
 using RandomizerMod.Logging;
 
@@ -14,6 +15,11 @@ namespace MoreLocations.Rando
             ConnectionMenu.Hook();
             LogicPatcher.Hook();
             RequestModifier.Hook();
+
+            if (ModHooks.GetMod("RandoSettingsManager") is Mod)
+            {
+                SettingsManagement.Hook();
+            }
 
             SettingsLog.AfterLogSettings += AddMoreLocationsSettings;
         }

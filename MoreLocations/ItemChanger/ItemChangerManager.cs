@@ -55,7 +55,7 @@ namespace MoreLocations.ItemChanger
                 flingType = FlingType.Everywhere,
                 tags = new()
                 {
-                    InteropTagFactory.CmiLocationTag(poolGroup: "LoreTablets", mapLocations: new[]
+                    InteropTagFactory.CmiLocationTag(poolGroup: "Lore Tablets", mapLocations: new[]
                     {
                         (SceneNames.Cliffs_02, -2.3f, 1.3f)
                     })
@@ -76,7 +76,7 @@ namespace MoreLocations.ItemChanger
                 flingType = FlingType.Everywhere,
                 tags = new()
                 {
-                    InteropTagFactory.CmiLocationTag(poolGroup: "GeoChests", mapLocations: new[]
+                    InteropTagFactory.CmiLocationTag(poolGroup: "Geo Chests", mapLocations: new[]
                     {
                         (SceneNames.Fungus1_28, 0.1f, -0.1f)
                     })
@@ -90,25 +90,25 @@ namespace MoreLocations.ItemChanger
             wj.name = MoreItemNames.Wanderers_Journal_Sale;
             wj.tags = new()
             {
-                InteropTagFactory.CmiSharedTag("RelicSales")
+                InteropTagFactory.CmiSharedTag(poolGroup: "Relic Sales", pinSpriteKey: "Geo Chests")
             };
             SpawnGeoItem hs = SpawnGeoItem.MakeGeoItem(450);
             hs.name = MoreItemNames.Hallownest_Seal_Sale;
             hs.tags = new()
             {
-                InteropTagFactory.CmiSharedTag("RelicSales")
+                InteropTagFactory.CmiSharedTag(poolGroup: "Relic Sales", pinSpriteKey: "Geo Chests")
             };
             SpawnGeoItem ki = SpawnGeoItem.MakeGeoItem(800);
             ki.name = MoreItemNames.Kings_Idol_Sale;
             ki.tags = new()
             {
-                InteropTagFactory.CmiSharedTag("RelicSales")
+                InteropTagFactory.CmiSharedTag(poolGroup: "Relic Sales", pinSpriteKey: "Geo Chests")
             };
             SpawnGeoItem ae = SpawnGeoItem.MakeGeoItem(1200);
             ae.name = MoreItemNames.Arcane_Egg_Sale;
             ae.tags = new()
             {
-                InteropTagFactory.CmiSharedTag("RelicSales")
+                InteropTagFactory.CmiSharedTag(poolGroup: "Relic Sales", pinSpriteKey: "Geo Chests")
             };
 
             Finder.DefineCustomItem(wj);
@@ -127,6 +127,7 @@ namespace MoreLocations.ItemChanger
                 fsmName = "npc_control",
                 dungDiscount = false,
                 facingDirection = FacingDirection.Left,
+                flingType = FlingType.DirectDeposit,
                 costDisplayerSelectionStrategy = new MixedCostDisplayerSelectionStrategy()
                 {
                     Capabilities =
