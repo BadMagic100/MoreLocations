@@ -81,7 +81,7 @@ namespace MoreLocations.Rando
 
             rootButton = new(connectionPage, Localization.Localize("MoreLocations"));
             rootButton.AddHideAndShowEvent(connectionPage, rootPage);
-            connectionPage.BeforeShow += SetTopLevelButtonColor(rootButton, () => RandoInterop.Settings.Enabled);
+            BindTopLevelButtonColor(rootButton, () => RandoInterop.Settings.Enabled);
 
             Localization.Localize(header);
             Localization.Localize(rootMef);
@@ -105,7 +105,7 @@ namespace MoreLocations.Rando
             VerticalItemPanel vip = new(miscPage, SpaceParameters.TOP_CENTER_UNDER_TITLE, SpaceParameters.VSPACE_SMALL,
                 true, miscLocationMef.Elements);
 
-            rootPage.BeforeShow += SetTopLevelButtonColor(jumpToMiscPage, () => RandoInterop.Settings.MiscLocationSettings.Any);
+            BindTopLevelButtonColor(jumpToMiscPage, () => RandoInterop.Settings.MiscLocationSettings.Any);
 
             Localization.Localize(header);
             Localization.Localize(miscLocationMef);
@@ -151,7 +151,7 @@ namespace MoreLocations.Rando
             VerticalItemPanel vip = new(lemmPage, SpaceParameters.TOP_CENTER_UNDER_TITLE, SpaceParameters.VSPACE_MEDIUM,
                 true, vipElements);
 
-            rootPage.BeforeShow += SetTopLevelButtonColor(jumpToLemmPage, () => RandoInterop.Settings.LemmShopSettings.Enabled);
+            BindTopLevelButtonColor(jumpToLemmPage, () => RandoInterop.Settings.LemmShopSettings.Enabled);
 
             Localization.Localize(header);
             Localization.Localize(lemmShopRootMef);
@@ -190,7 +190,7 @@ namespace MoreLocations.Rando
             VerticalItemPanel vip = new(junkShopPage, SpaceParameters.TOP_CENTER_UNDER_TITLE, SpaceParameters.VSPACE_MEDIUM,
                 true, vipElements);
 
-            rootPage.BeforeShow += SetTopLevelButtonColor(jumpToJunkShopPage, () => RandoInterop.Settings.JunkShopSettings.Enabled);
+            BindTopLevelButtonColor(jumpToJunkShopPage, () => RandoInterop.Settings.JunkShopSettings.Enabled);
 
             Localization.Localize(header);
             Localization.Localize(junkShopRootMef);
@@ -200,9 +200,9 @@ namespace MoreLocations.Rando
             return junkShopPage;
         }
 
-        private Action SetTopLevelButtonColor(SmallButton target, Func<bool> condition)
+        private void BindTopLevelButtonColor(SmallButton target, Func<bool> condition)
         {
-            return () =>
+            target.Parent.BeforeShow += () =>
             {
                 target.Text.color = condition() ? Colors.TRUE_COLOR : Colors.DEFAULT_COLOR;
             };
