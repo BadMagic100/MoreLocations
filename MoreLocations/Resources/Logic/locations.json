@@ -1,7 +1,7 @@
 ﻿[
   {
     "name": "Swim",
-    "logic": "Crossroads_50[right1] + Monomon + (LISTEN ? ANY)"
+    "logic": "Crossroads_50[right1] + Monomon + (LISTEN ? TRUE)"
   },
   {
     "name": "Stag_Nest_Egg",
@@ -17,6 +17,6 @@
   },
   {
     "name": "Junk_Shop",
-    "logic": "*Geo_Rock-Fluke_Hermit + (SWIM | RIGHTSKIPACID | (DIFFICULTSKIPS + ACIDSKIPS + RIGHTDASH + RIGHTCLAW + WINGS + (SPELLAIRSTALL + $CASTSPELL[3] | RIGHTSHARPSHADOW))) + (LISTEN ? ANY)"
+    "logic": "*Geo_Rock-Fluke_Hermit_Dupe + (SWIM | RIGHTSKIPACID | (DIFFICULTSKIPS + ACIDSKIPS + RIGHTDASH + RIGHTCLAW + WINGS + (SPELLAIRSTALL + $CASTSPELL[3] | RIGHTSHARPSHADOW))) + (LISTEN ? TRUE)"
   }
 ]

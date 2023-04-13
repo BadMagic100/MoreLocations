@@ -543,7 +543,7 @@ namespace MoreLocations.Rando
 
         private static void DerangeLemmShop(RequestBuilder rb)
         {
-            if (!RandoInterop.Settings.Enabled || !RandoInterop.Settings.LemmShopSettings.Enabled || !rb.gs.CursedSettings.Deranged)
+            if (!RandoInterop.Enabled || !RandoInterop.Settings.LemmShopSettings.Enabled || !rb.gs.CursedSettings.Deranged)
             {
                 return;
             }
@@ -566,7 +566,7 @@ namespace MoreLocations.Rando
 
         private static void AddRelicCostTolerances(LogicManager lm, GenerationSettings gs, ProgressionInitializer pi)
         {
-            if (!RandoInterop.Settings.Enabled || !RandoInterop.Settings.LemmShopSettings.Enabled)
+            if (!RandoInterop.Enabled || !RandoInterop.Settings.LemmShopSettings.Enabled)
             {
                 return;
             }

@@ -126,6 +126,10 @@ namespace MoreLocations.ItemChanger
                 objectName = "Fluke Hermit",
                 fsmName = "npc_control",
                 dungDiscount = false,
+                //figureheadSprite = new MoreLocationsSprite()
+                //{
+                //    key = "FlukeShopFigurehead"
+                //},
                 facingDirection = FacingDirection.Left,
                 flingType = FlingType.DirectDeposit,
                 costDisplayerSelectionStrategy = new MixedCostDisplayerSelectionStrategy()
