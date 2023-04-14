@@ -50,6 +50,12 @@ namespace MoreLocations.Rando.Costs
 
         public void PreRandomize(Random rng)
         {
+            // only consume rng and do work if there's actually costs that need it (prevent unintended side effects)
+            if (createdCosts.Count == 0)
+            {
+                return;
+            }
+
             // pick a random amount of the remaining capacity (max total value) to distribute back down to the generated costs
             int capacityToDistribute = rng.Next(capacity + 1);
             capacity -= capacityToDistribute;
