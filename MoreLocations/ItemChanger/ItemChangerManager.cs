@@ -2,6 +2,7 @@
 using ItemChanger.Items;
 using ItemChanger.Locations;
 using MoreLocations.ItemChanger.CostIconSupport;
+using RandomizerCore.Logic;
 
 namespace MoreLocations.ItemChanger
 {
@@ -147,6 +148,9 @@ namespace MoreLocations.ItemChanger
                     InteropTagFactory.CmiLocationTag(poolGroup: "Shops", mapLocations: new[]
                     {
                         (SceneNames.GG_Waterways, 0.7f, 0.6f)
+                    }, locationHints: new[]
+                    {
+                        new RawLogicDef("Go right under the wall next to the second water pool.", "TRUE")
                     })
                 }
             };

@@ -70,7 +70,7 @@ namespace MoreLocations.Rando.Costs
             // small optimization - no need to randomize if we're not giving out any capacity
             if (capacityToDistribute > 0)
             {
-                for (int i = 0; i < createdCosts.Count; i++)
+                for (int i = 1; i < createdCosts.Count; i++)
                 {
                     sectioningPoints[i] = rng.Next(capacityToDistribute + 1);
                 }

@@ -1,4 +1,5 @@
 ﻿using ItemChanger.Tags;
+using RandomizerCore.Logic;
 
 namespace MoreLocations.ItemChanger
 {
@@ -16,6 +17,7 @@ namespace MoreLocations.ItemChanger
         private const string CmiPoolGroupProperty = "PoolGroup";
         private const string CmiPinSpriteKeyProperty = "PinSpriteKey";
         private const string CmiMapLocationsProperty = "MapLocations";
+        private const string CmiLocationHintsProperty = "LocationHints";
 
         public static InteropTag CmiSharedTag(string? poolGroup = null, string? pinSpriteKey = null)
         {
@@ -33,10 +35,11 @@ namespace MoreLocations.ItemChanger
         }
 
         public static InteropTag CmiLocationTag(string? poolGroup = null, string? pinSpriteKey = null,
-            (string, float, float)[]? mapLocations = null)
+            (string, float, float)[]? mapLocations = null, RawLogicDef[]? locationHints = null)
         {
             InteropTag t = CmiSharedTag(poolGroup: poolGroup, pinSpriteKey: pinSpriteKey);
             t.SetProperty(CmiMapLocationsProperty, mapLocations);
+            t.SetProperty(CmiLocationHintsProperty, locationHints);
             return t;
         }
     }
