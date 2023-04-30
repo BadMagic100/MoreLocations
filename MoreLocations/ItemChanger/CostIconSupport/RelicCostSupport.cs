@@ -27,7 +27,7 @@ namespace MoreLocations.ItemChanger.CostIconSupport
 
         public bool MatchesCost(Cost c)
         {
-            return c is ConsumablePDIntCost cpdi && fieldSpriteLookup.ContainsKey(cpdi.fieldName);
+            return c.GetBaseCost() is ConsumablePDIntCost cpdi && fieldSpriteLookup.ContainsKey(cpdi.fieldName);
         }
     }
 }

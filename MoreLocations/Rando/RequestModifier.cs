@@ -53,35 +53,19 @@ namespace MoreLocations.Rando
             relicCostProvider.AddDynamicWeight(new CappedIntCostProvider("WANDERERSJOURNALS", 
                 RandoInterop.Settings.LemmShopSettings.CostSettings.MinimumJournalCost, 
                 RandoInterop.Settings.LemmShopSettings.CostSettings.MaximumJournalCost, 
-                amount =>
-            {
-                string suffix = amount == 1 ? "" : "s";
-                return new ConsumablePDIntCost(amount, nameof(PlayerData.trinket1), $"Trade {amount} Wanderer's Journal{suffix}");
-            }));
+                amount => new RelicCost(amount, RelicType.Journal)));
             relicCostProvider.AddDynamicWeight(new CappedIntCostProvider("HALLOWNESTSEALS",
                 RandoInterop.Settings.LemmShopSettings.CostSettings.MinimumSealCost,
                 RandoInterop.Settings.LemmShopSettings.CostSettings.MaximumSealCost,
-                amount =>
-            {
-                string suffix = amount == 1 ? "" : "s";
-                return new ConsumablePDIntCost(amount, nameof(PlayerData.trinket2), $"Trade {amount} Hallownest Seal{suffix}");
-            }));
+                amount => new RelicCost(amount, RelicType.Seal)));
             relicCostProvider.AddDynamicWeight(new CappedIntCostProvider("KINGSIDOLS", 
                 RandoInterop.Settings.LemmShopSettings.CostSettings.MinimumIdolCost,
                 RandoInterop.Settings.LemmShopSettings.CostSettings.MaximumIdolCost,
-                amount =>
-            {
-                string suffix = amount == 1 ? "" : "s";
-                return new ConsumablePDIntCost(amount, nameof(PlayerData.trinket3), $"Trade {amount} King's Idol{suffix}");
-            }));
+                amount => new RelicCost(amount, RelicType.Idol)));
             relicCostProvider.AddDynamicWeight(new CappedIntCostProvider("ARCANEEGGS", 
                 RandoInterop.Settings.LemmShopSettings.CostSettings.MinimumEggCost, 
-                RandoInterop.Settings.LemmShopSettings.CostSettings.MaximumEggCost, 
-                amount =>
-            {
-                string suffix = amount == 1 ? "" : "s";
-                return new ConsumablePDIntCost(amount, nameof(PlayerData.trinket4), $"Trade {amount} Arcane Egg{suffix}");
-            }));
+                RandoInterop.Settings.LemmShopSettings.CostSettings.MaximumEggCost,
+                amount => new RelicCost(amount, RelicType.Egg)));
 
             anyCostProvider = new WeightedRandomCostChooser()
             {
@@ -559,7 +543,7 @@ namespace MoreLocations.Rando
             {
                 if (igb.strategy is DefaultGroupPlacementStrategy dgps)
                 {
-                    dgps.Constraints += (i, l) => !(relicGeoNames.Contains(i.Name) && l.Name == LocationNames.Lemm);
+                    dgps.ConstraintList.Add(new((i, l) => !(relicGeoNames.Contains(i.Name) && l.Name == LocationNames.Lemm)));
                 }
             }
         }
