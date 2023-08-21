@@ -120,7 +120,7 @@ namespace MoreLocations.ItemChanger
 
         private static void DefineJunkShopLocation()
         {
-            CustomShopLocation junkShop = new()
+            JunkShopLocation junkShop = new()
             {
                 name = MoreLocationNames.Junk_Shop,
                 sceneName = SceneNames.Room_GG_Shortcut,
