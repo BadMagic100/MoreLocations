@@ -233,7 +233,7 @@ namespace MoreLocations.Rando
                 info.getLocationDef = () => new LocationDef()
                 {
                     Name = LocationNames.Lemm,
-                    SceneName = SceneNames.Ruins1_05,
+                    SceneName = SceneNames.Ruins1_05b,
                     FlexibleCount = true,
                     AdditionalProgressionPenalty = true,
                 };
