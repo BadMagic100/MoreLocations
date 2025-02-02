@@ -1,7 +1,7 @@
 ﻿[
   {
     "name": "Swim",
-    "logic": "Crossroads_50[right1] + Monomon + (LISTEN ? TRUE)"
+    "logic": "Crossroads_50[right1] + Monomon + (LISTEN ? TRUE) + (QUIRREL>8 ? TRUE)"
   },
   {
     "name": "Stag_Nest_Egg",
