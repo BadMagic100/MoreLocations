@@ -3,6 +3,7 @@ using ItemChanger.Locations;
 using MoreLocations.ItemChanger;
 using MoreLocations.ItemChanger.CostIconSupport;
 using MoreLocations.Rando.Costs;
+using Newtonsoft.Json;
 using RandomizerCore;
 using RandomizerCore.Logic;
 using RandomizerCore.Randomization;
@@ -11,7 +12,9 @@ using RandomizerMod.RC;
 using RandomizerMod.Settings;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace MoreLocations.Rando
 {
@@ -442,6 +445,20 @@ namespace MoreLocations.Rando
             if (RandoInterop.Settings.MiscLocationSettings.BaldurShellChest)
             {
                 rb.AddLocationByName(MoreLocationNames.Geo_Chest_Above_Baldur_Shell);
+            }
+            if (RandoInterop.Settings.MiscLocationSettings.AdditionalLocations)
+            {
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                JsonSerializer jsonSerializer = new() {TypeNameHandling = TypeNameHandling.Auto};
+                
+                using Stream stream = assembly.GetManifestResourceStream("MoreLocations.Resources.Data.customlocations.json");
+                StreamReader streamReader = new(stream);
+                List<AdditionalLocation> additionalLocations = jsonSerializer.Deserialize<List<AdditionalLocation>>(new JsonTextReader(streamReader));
+            
+                foreach (AdditionalLocation al in additionalLocations)
+                {
+                    rb.AddLocationByName(al.name);
+                }
             }
         }
 
