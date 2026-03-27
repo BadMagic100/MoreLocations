@@ -1,8 +1,11 @@
 ﻿using ItemChanger;
+using MoreLocations.ItemChanger;
+using Newtonsoft.Json;
 using RandomizerCore.Json;
 using RandomizerCore.Logic;
 using RandomizerMod.RC;
 using RandomizerMod.Settings;
+using System.Collections.Generic;
 using System.IO;
 
 namespace MoreLocations.Rando
@@ -38,6 +41,7 @@ namespace MoreLocations.Rando
         private static void AddLogicObjects(LogicManagerBuilder lmb)
         {
             JsonLogicFormat fmt = new();
+            JsonSerializer jsonSerializer = new() {TypeNameHandling = TypeNameHandling.Auto};
 
             using Stream t = typeof(LogicPatcher).Assembly.GetManifestResourceStream("MoreLocations.Resources.Logic.terms.json");
             lmb.DeserializeFile(LogicFileType.Terms, fmt, t);
@@ -47,6 +51,15 @@ namespace MoreLocations.Rando
 
             using Stream l = typeof(LogicPatcher).Assembly.GetManifestResourceStream("MoreLocations.Resources.Logic.locations.json");
             lmb.DeserializeFile(LogicFileType.Locations, fmt, l);
+            
+            using Stream l2 = typeof(LogicPatcher).Assembly.GetManifestResourceStream("MoreLocations.Resources.Data.customlocations.json");
+            StreamReader streamReader = new(l2);
+            List<AdditionalLocation> additionalLocations = jsonSerializer.Deserialize<List<AdditionalLocation>>(new JsonTextReader(streamReader));
+        
+            foreach (AdditionalLocation al in additionalLocations)
+            {
+                lmb.AddLogicDef(new(al.name, al.logic));
+            }
         }
 
         private static void OverrideLemmUsages(LogicManagerBuilder lmb)
