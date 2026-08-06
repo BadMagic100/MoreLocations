@@ -20,6 +20,7 @@ The Miscellaneous Locations sub-menu contains several individually toggleable on
 * **Stag Nest Egg**: I hope you can figure out where this is by the name.
 * **Baldur Shell Chest**: Did you know that all the geo chests in the game have holes in the bottom? This is the only one you can usually
   go through though. Hope you brought benchwarp for when the shiny goes down there!
+* **Additional Locations**: In the event of requiring more locations, some additional new locations scattered through Hallownest can be included in the pool.
 
 ### Lemm Shop
 

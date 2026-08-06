@@ -1,0 +1,335 @@
+[
+    {
+        "name": "Custom_Location-Near_Mawlek",
+        "sceneName": "Crossroads_36",
+        "x": 14.5,
+        "y": 21.4,
+        "pinX": -0.4,
+        "pinY": -0.3,
+        "logic": "Crossroads_36[right1] | Crossroads_36[right2]"
+    },
+    {
+        "name": "Custom_Location-Near_Black_Temple",
+        "sceneName": "Crossroads_39",
+        "x": 68.6,
+        "y": 17.7,
+        "pinX": 0.5,
+        "pinY": 0.15,
+        "logic": "(Crossroads_39[left1] | Crossroads_39[right1]) + (RIGHTCLAW | WINGS)"
+    },
+    {
+        "name": "Custom_Location-Crossroads_Center",
+        "sceneName": "Crossroads_40",
+        "x": 29.8,
+        "y": 8.1,
+        "pinX": 0.0,
+        "pinY": 0.0,
+        "logic": "Crossroads_40[left1] | Crossroads_40[right1]"
+    },
+    {
+        "name": "Custom_Location-Deepnest_Above_Hot_Springs",
+        "sceneName": "Deepnest_30",
+        "x": 28.6,
+        "y": 104.4,
+        "pinX": -0.6,
+        "pinY": 0.48,
+        "logic": "Deepnest_30[top1]"
+    },
+    {
+        "name": "Custom_Location-Deepnest_Above_Hot_Springs_2",
+        "sceneName": "Deepnest_30",
+        "x": 44.0,
+        "y": 138.4,
+        "pinX": -0.11,
+        "pinY": 0.88,
+        "logic": "Deepnest_30[top1]"
+    },
+    {
+        "name": "Custom_Location-Deepnest_Above_Hot_Springs_Dupe_3",
+        "sceneName": "Deepnest_30",
+        "x": 75.9,
+        "y": 70.4,
+        "pinX": 0.2,
+        "pinY": -0.08,
+        "logic": "Deepnest_30[top1] + (RIGHTDASH | WINGS | ANYCLAW)"
+    },
+    {
+        "name": "Custom_Location-Deepnest_Near_Zote",
+        "sceneName": "Deepnest_33",
+        "x": 60.0,
+        "y": 31.4,
+        "pinX": 0.0,
+        "pinY": 0.0,
+        "logic": "Deepnest_33[top2] | (Deepnest_33[top1] | Deepnest_33[bot1]) + (ANYCLAW | WINGS)"
+    },
+    {
+        "name": "Custom_Location-Deepnest_Center",
+        "sceneName": "Deepnest_34",
+        "x": 107.0,
+        "y": 35.4,
+        "pinX": 0.54,
+        "pinY": 0.09,
+        "logic": "Deepnest_34[top1] + (DARKROOMS | LANTERN) + (ANYCLAW | WINGS | ENEMYPOGOS) | Deepnest_34 + (FULLCLAW | WINGS + (LEFTCLAW | RIGHTCLAW + LEFTDASH) | RIGHTCLAW + $SHRIEKPOGO[before:ROOMSOUL,after:ROOMSOUL])"
+    },
+    {
+        "name": "Custom_Location-Below_Distant_Village",
+        "sceneName": "Deepnest_41",
+        "x": 81.1,
+        "y": 70.4,
+        "pinX": 0.3,
+        "pinY": 0.3,
+        "logic": "Deepnest_41"
+    },
+    {
+        "name": "Custom_Location-Bardoon",
+        "sceneName": "Deepnest_East_04",
+        "x": 40.0,
+        "y": 164.4,
+        "pinX": 0.24,
+        "pinY": 1.28,
+        "logic": "Deepnest_East_04[right2] + (WINGS | RIGHTCLAW | LEFTCLAW + (RIGHTDASH | RIGHTSUPERDASH | ENEMYPOGOS) | (ENEMYPOGOS + DANGEROUSSKIPS)) | Deepnest_East_04 + (FULLCLAW + ENEMYPOGOS | WINGS)"
+    },
+    {
+        "name": "Custom_Location-Upper_Edge",
+        "sceneName": "Deepnest_East_07",
+        "x": 80.0,
+        "y": 164.4,
+        "pinX": 0.7,
+        "pinY": 1.13,
+        "logic": "Deepnest_East_07[left1] | Deepnest_East_07 + (WINGS | ANYCLAW)"
+    },
+    {
+        "name": "Custom_Location-Below_Colosseum",
+        "sceneName": "Deepnest_East_08",
+        "x": 50.1,
+        "y": 34.4,
+        "pinX": 0.0,
+        "pinY": 0.2,
+        "logic": "(Deepnest_East_08[top1] | Deepnest_East_08[right1]) + (ANYCLAW | WINGS | RIGHTDASH + (MARKOFPRIDE | LONGNAIL + PRECISEMOVEMENT) + ENEMYPOGOS)"
+    },
+    {
+        "name": "Custom_Location-Near_Sheo",
+        "sceneName": "Fungus1_09",
+        "x": 178.6,
+        "y": 28.4,
+        "pinX": 0.0,
+        "pinY": 0.0,
+        "logic": "Fungus1_09[left1] + LEFTCLAW | Fungus1_09[right1] + (LEFTCLAW + (LEFTSUPERDASH + RIGHTCLAW + (LEFTDASH | WINGS) | WINGS + LEFTDASH) | RIGHTCLAW + LEFTDASH + WINGS + LEFTSUPERDASH + DANGEROUSSKIPS + PRECISEMOVEMENT | LEFTDASH + (RIGHTCLAW + $SHRIEKPOGO[1,1,1,before:AREASOUL,after:AREASOUL] | $SHRIEKPOGO[1,1,1,1,1,1,before:AREASOUL,after:AREASOUL]) | LEFTCLAW + (RIGHTCLAW | DIFFICULTSKIPS) + $SHRIEKPOGO[2,before:AREASOUL,after:AREASOUL,NOSTALL])"
+    },
+    {
+        "name": "Custom_Location-Loodle_Hallway",
+        "sceneName": "Fungus1_23",
+        "x": 94.8,
+        "y": 8.4,
+        "pinX": 0.3,
+        "pinY": -0.08,
+        "logic": "Fungus1_23[left1] | Fungus1_23[right1]"
+    },
+    {
+        "name": "Custom_Location-Above_Leg_Eater",
+        "sceneName": "Fungus2_06",
+        "x": 31.2,
+        "y": 121.4,
+        "pinX": 0.33,
+        "pinY": 0.99,
+        "logic": "Fungus2_06[top1] | Fungus2_06[right1] | Fungus2_06 + (ACID | RIGHTDASH | WINGS | RIGHTCLAW | RIGHTSUPERDASH | SPELLAIRSTALL + $CASTSPELL[before:AREASOUL,after:ROOMSOUL])"
+    },
+    {
+        "name": "Custom_Location-Shrumal_Warrior_Island",
+        "sceneName": "Fungus2_07",
+        "x": 47.7,
+        "y": 5.4,
+        "pinX": 0.2,
+        "pinY": -0.08,
+        "logic": "Fungus2_07[left1] + (ANYDASH | ACID | WINGS) | Fungus2_07[right1] + (LEFTDASH | ANYCLAW + RIGHTDASH | ACID | WINGS)"
+    },
+    {
+        "name": "Custom_Location-Bouncy_Shroom_Room",
+        "sceneName": "Fungus2_10",
+        "x": 5.8,
+        "y": 14.4,
+        "pinX": -0.39,
+        "pinY": -0.24,
+        "logic": "Fungus2_10[right1] | Fungus2_10[right2] | Fungus2_10[bot1]"
+    },
+    {
+        "name": "Custom_Location-West_Fungal_Wastes",
+        "sceneName": "Fungus2_19",
+        "x": 49.6,
+        "y": 7.4,
+        "pinX": 0.3,
+        "pinY": -0.1,
+        "logic": "Fungus2_19[top1] | Fungus2_19[left1] + (RIGHTCLAW | WINGS)"
+    },
+    {
+        "name": "Custom_Location-Shrumal_Warrior_Start",
+        "sceneName": "Fungus2_28",
+        "x": 72.8,
+        "y": 22.4,
+        "pinX": 0.32,
+        "pinY": 0.16,
+        "logic": "Fungus2_28[left1] | Fungus2_28[left2]"
+    },
+    {
+        "name": "Custom_Location-Canyon_Tall_Room",
+        "sceneName": "Fungus3_02",
+        "x": 7.7,
+        "y": 33.4,
+        "pinX": -0.09,
+        "pinY": -0.27,
+        "logic": "Fungus3_02"
+    },
+    {
+        "name": "Custom_Location-Near_Petra_Arena",
+        "sceneName": "Fungus3_04",
+        "x": 6.2,
+        "y": 5.4,
+        "pinX": -0.18,
+        "pinY": -0.7,
+        "logic": "Fungus3_04[right2] | Fungus3_04"
+    },
+    {
+        "name": "Custom_Location-Garden_Dream_Root",
+        "sceneName": "Fungus3_11",
+        "x": 5.1,
+        "y": 16.4,
+        "pinX": -0.35,
+        "pinY": -0.25,
+        "logic": "Fungus3_11 + (WINGS | LEFTCLAW | ENEMYPOGOS)"
+    },
+    {
+        "name": "Custom_Location-Canyon_Shadow_Gate",
+        "sceneName": "Fungus3_25",
+        "x": 34.3,
+        "y": 14.6,
+        "pinX": -0.3,
+        "pinY": 0.0,
+        "logic": "Fungus3_25[left1] | Fungus3_25[right1] + LEFTSHADOWDASH"
+    },
+    {
+        "name": "Custom_Location-Canyon_Notch",
+        "sceneName": "Fungus3_28",
+        "x": 3.8,
+        "y": 20.4,
+        "pinX": -0.4,
+        "pinY": 0.0,
+        "logic": "*Charm_Notch-Fog_Canyon"
+    },
+    {
+        "name": "Custom_Location-Below_Marmu",
+        "sceneName": "Fungus3_40",
+        "x": 121.8,
+        "y": 4.4,
+        "pinX": 0.66,
+        "pinY": -0.11,
+        "logic": "Fungus3_40[top1] | (Fungus3_40[right1] | Can_Stag + Queen's_Gardens_Stag | Bench-Gardens_Stag) + (LEFTCLAW | RIGHTCLAW + LEFTSUPERDASH | WINGS | LEFTDASH)"
+    },
+    {
+        "name": "Custom_Location-Flukemunga_Tunnel",
+        "sceneName": "GG_Pipeway",
+        "x": 141.7,
+        "y": 31.4,
+        "pinX": 1.2,
+        "pinY": 0.0,
+        "logic": "(GG_Pipeway[left1] | GG_Pipeway[right1]) + (ANYCLAW | WINGS + ENEMYPOGOS)"
+    },
+    {
+        "name": "Custom_Location-Hive_Exit",
+        "sceneName": "Hive_03_c",
+        "x": 34.9,
+        "y": 94.4,
+        "pinX": -0.51,
+        "pinY": 0.0,
+        "logic": "Hive_03_c + (RIGHTCLAW | WINGS | LEFTCLAW + (RIGHTDASH | RIGHTSUPERDASH))"
+    },
+    {
+        "name": "Custom_Location-Near_Hive_Knight",
+        "sceneName": "Hive_04",
+        "x": 201.2,
+        "y": 90.4,
+        "pinX": 0.5,
+        "pinY": -0.25,
+        "logic": "Hive_04[left1] | Hive_04[right1]"
+    },
+    {
+        "name": "Custom_Location-Peak_Below_Spike_Grub",
+        "sceneName": "Mines_03",
+        "x": 20.3,
+        "y": 20.4,
+        "pinX": 0.02,
+        "pinY": -0.08,
+        "logic": "Mines_03"
+    },
+    {
+        "name": "Custom_Location-Hallownest_Crown",
+        "sceneName": "Mines_34",
+        "x": 96.9,
+        "y": 22.4,
+        "pinX": -0.42,
+        "pinY": -0.31,
+        "logic": "Mines_34[bot1] + (ANYCLAW | WINGS)"
+    },
+    {
+        "name": "Custom_Location-Ruins_Lever_Room",
+        "sceneName": "Ruins1_05",
+        "x": 7.8,
+        "y": 106.4,
+        "pinX": -0.55,
+        "pinY": 0.44,
+        "logic": "Ruins1_05[bot1] + (ANYCLAW | WINGS) | Ruins1_05[bot2] + (LEFTCLAW + WINGS | RIGHTCLAW) + Lever-City_Above_Lemm_Upper?NONE"
+    },
+    {
+        "name": "Custom_Location-Ruins_Lever_Room_Dupe",
+        "sceneName": "Ruins1_05",
+        "x": 17.0,
+        "y": 123.4,
+        "pinX": -0.2,
+        "pinY": 0.85,
+        "logic": "Ruins1_05[bot1] + (LEFTCLAW | WINGS + (RIGHTCLAW | ENEMYPOGOS) | RIGHTCLAW + ENEMYPOGOS) | Ruins1_05[bot2] + (LEFTCLAW + WINGS | RIGHTCLAW) + Lever-City_Above_Lemm_Upper?NONE"
+    },
+    {
+        "name": "Custom_Location-City_Storerooms",
+        "sceneName": "Ruins1_17",
+        "x": 78.7,
+        "y": 38.4,
+        "pinX": 0.55,
+        "pinY": 0.0,
+        "logic": "Ruins1_17[top1] | Ruins1_17[right1] | Ruins1_17[bot1] + Lever-City_Storerooms?NONE"
+    },
+    {
+        "name": "Custom_Location-City_Fountain",
+        "sceneName": "Ruins1_27",
+        "x": 52.6,
+        "y": 15.4,
+        "pinX": 0.35,
+        "pinY": -0.15,
+        "logic": "(Ruins1_27[left1] + Lever-City_Fountain | Ruins1_27[right1]) + (WINGS | ANYCLAW)"
+    },
+    {
+        "name": "Custom_Location-King's_Station",
+        "sceneName": "Ruins2_06",
+        "x": 6.6,
+        "y": 31.4,
+        "pinX": -0.4,
+        "pinY": 0.11,
+        "logic": "Ruins2_06[top1] | Ruins2_06[left1] | Ruins2_06[right1] | Ruins2_06[left2] + (WINGS | RIGHTSUPERDASH | SWIM | RIGHTCLAW + RIGHTDASH + PRECISEMOVEMENT) + (RIGHTCLAW | WINGS | ENEMYPOGOS) | Ruins2_06[right2] + (RIGHTCLAW | WINGS | ENEMYPOGOS)"
+    },
+    {
+        "name": "Custom_Location-Near_Dung_Defender",
+        "sceneName": "Waterways_02",
+        "x": 118.7,
+        "y": 31.4,
+        "pinX": 0.0,
+        "pinY": 0.0,
+        "logic": "Waterways_02 + (ANYCLAW | ENEMYPOGOS + WINGS)"
+    },
+    {
+        "name": "Custom_Location-Near_Isma's_Tunnel",
+        "sceneName": "Waterways_06",
+        "x": 11.3,
+        "y": 15.2,
+        "pinX": -1.2,
+        "pinY": -0.21,
+        "logic": "Waterways_06[top1] | Waterways_06[right1] + (ACID | LEFTSUPERDASH + (LEFTCLAW | LEFTDASH | WINGS | ENEMYPOGOS | RIGHTCLAW + PRECISEMOVEMENT)"
+    }
+]

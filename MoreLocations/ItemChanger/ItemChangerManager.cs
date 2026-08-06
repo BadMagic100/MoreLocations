@@ -2,7 +2,11 @@
 using ItemChanger.Items;
 using ItemChanger.Locations;
 using MoreLocations.ItemChanger.CostIconSupport;
+using Newtonsoft.Json;
 using RandomizerCore.Logic;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 
 namespace MoreLocations.ItemChanger
 {
@@ -13,6 +17,7 @@ namespace MoreLocations.ItemChanger
             DefineSwimLocation();
             DefineStagEggLocation();
             DefineBaldurShellChest();
+            DefineAdditionalLocations();
             DefineRelicSaleItems();
             DefineJunkShopLocation();
         }
@@ -83,6 +88,37 @@ namespace MoreLocations.ItemChanger
                     })
                 }
             });
+        }
+        
+
+        private static void DefineAdditionalLocations()
+        {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            JsonSerializer jsonSerializer = new() {TypeNameHandling = TypeNameHandling.Auto};
+            
+            using Stream stream = assembly.GetManifestResourceStream("MoreLocations.Resources.Data.customlocations.json");
+            StreamReader streamReader = new(stream);
+            List<AdditionalLocation> additionalLocations = jsonSerializer.Deserialize<List<AdditionalLocation>>(new JsonTextReader(streamReader));
+        
+            foreach (AdditionalLocation al in additionalLocations)
+            {
+                Finder.DefineCustomLocation(new CoordinateLocation()
+                {
+                    name = al.name,
+                    sceneName = al.sceneName,
+                    x = al.x,
+                    y = al.y,
+                    elevation = 0,
+                    flingType = FlingType.Everywhere,
+                    tags =
+                    [
+                        InteropTagFactory.CmiLocationTag(poolGroup: "Custom Locations", mapLocations: new[]
+                        {
+                            (al.sceneName, al.pinX, al.pinY)
+                        })
+                    ]
+                });
+            }
         }
 
         private static void DefineRelicSaleItems()
